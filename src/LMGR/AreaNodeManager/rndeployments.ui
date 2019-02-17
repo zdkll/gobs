@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RNDeployments</class>
+ <widget class="QDialog" name="RNDeployments">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1241</width>
+    <height>596</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>540</y>
+     <width>1201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="refreshBtn">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>560</y>
+     <width>107</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Refresh</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeBtn">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>560</y>
+     <width>107</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>1221</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1091</width>
+      <height>531</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="editDepoyTimeBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>20</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Edit Depoly
+Time...</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="editPickupTimeBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>90</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Edit Pickup
+Time...</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="editCoordBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>180</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Edit 
+X,Y,Z</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="deleteDepolysBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>270</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Delete 
+Depolyments</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="importDepolyBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>340</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Import
+ Depolyments</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exportSheetBtn">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>420</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Export 
+Sheet</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

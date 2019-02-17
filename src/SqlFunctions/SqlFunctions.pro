@@ -1,0 +1,24 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2017-12-20T17:44:35
+#
+#-------------------------------------------------
+#数据库操作接口库
+
+QT       += core sql
+
+
+TARGET = GBSqlFunctions
+
+TEMPLATE = lib
+
+include (../../gobs.pri)
+
+DESTDIR = $$GOBS_DIR/lib
+
+SOURCES += main.cpp \
+    sqlfunctions.cpp
+
+HEADERS += \
+    sqlfunctions.h \
+    sqlmacro.h \
