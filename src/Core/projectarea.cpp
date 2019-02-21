@@ -1,10 +1,13 @@
-#include "public.h"
+﻿#include "projectarea.h"
+
 #include "core.h"
 
 QString Project::projName(const ProjectInfo &projectInfo)
 {
     return projectInfo.ProjectPath + Dir_Separator +projectInfo.ProjectName+Project_File_Suffix;
 }
+
+
 int Project::createProject(const ProjectInfo &projectInfo)
 {
     QString projFile = projectInfo.ProjectPath;
@@ -614,4 +617,3 @@ QStringList Area::spsFiles1(const QString &projPath,const QString &areaName)
     }
     return areaList;
 }
-

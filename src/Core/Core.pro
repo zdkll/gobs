@@ -14,14 +14,14 @@ include (../../gobs.pri)
 
 DESTDIR = $$GOBS_LIB
 
-#CONFIG +=debug
+DEFINES += CORE_LIBRARY
 
 SOURCES += \
     core.cpp \
-    public.cpp \
     spsfiles.cpp \
     segy.cpp \
-    assistant.cpp
+    assistant.cpp \
+    projectarea.cpp
 
 HEADERS += \
     core.h \
@@ -29,7 +29,9 @@ HEADERS += \
     macro.h \
     spsfiles.h \
     segy.h \
-    assistant.h
+    assistant.h \
+    core_global.h \
+    projectarea.h
 
 win32{
 LIBS += -lwsock32

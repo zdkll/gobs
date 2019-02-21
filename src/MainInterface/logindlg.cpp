@@ -1,4 +1,4 @@
-#include "logindlg.h"
+﻿#include "logindlg.h"
 #include "ui_logindlg.h"
 
 
@@ -84,7 +84,7 @@ void LoginDlg::initDlg()
     ui->rmbPwdBtn->setChecked(m_user.isRmbPwd);
 
     m_pwdHint = new HintLabel(ui->pwdHintLbl);
-    connect(ui->pwdEdit,QLineEdit::textChanged,this,&LoginDlg::slotPwdHintNormal);
+    connect(ui->pwdEdit,&QLineEdit::textChanged,this,&LoginDlg::slotPwdHintNormal);
 }
 
 bool LoginDlg::initUserInfo(User &user)

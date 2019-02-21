@@ -1,0 +1,12 @@
+﻿#ifndef  GPUBLICSO_GLOBAL_H
+#define GPUBLICSO_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(GPUBLICSO_LIBRARY)
+#define GPUBLICSOSHARED_EXPORT  Q_DECL_EXPORT
+#else
+#define GPUBLICSOSHARED_EXPORT  Q_DECL_IMPORT
+#endif
+
+#endif // GPUBLICSO_GLOBAL_H

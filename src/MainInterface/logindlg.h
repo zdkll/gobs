@@ -1,4 +1,4 @@
-#ifndef LOGINDLG_H
+﻿#ifndef LOGINDLG_H
 #define LOGINDLG_H
 
 #include <QDialog>

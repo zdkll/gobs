@@ -1,4 +1,4 @@
-#include "rnmgrunit.h"
+﻿#include "rnmgrunit.h"
 #include "rnmanager.h"
 
 #include <QStyledItemDelegate>

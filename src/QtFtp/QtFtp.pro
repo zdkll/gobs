@@ -12,13 +12,17 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
+
+DEFINES += QTFTP_LIBRARY
+
 DESTDIR = $$GOBS_LIB
 
 SOURCES += qftp.cpp \
     qurlinfo.cpp
 
 HEADERS += qftp.h\
-    qurlinfo.h
+    qurlinfo.h \
+    qtftp_global.h
 
 unix {
     target.path = /usr/lib

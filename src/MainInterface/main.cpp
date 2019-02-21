@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 #include <QDir>
 #include <QDebug>
@@ -21,14 +21,14 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(icon));
 
     //登陆界对话框
-    LoginDlg dlg;
+//    LoginDlg dlg;
 
-    int ret;
-    if(dlg.exec()){
+//    int ret;
+//    if(dlg.exec()){
         MainWindow w;
         w.show();
-        ret = a.exec();
-    }
+      int  ret = a.exec();
+//    }
 
     return ret;
 }

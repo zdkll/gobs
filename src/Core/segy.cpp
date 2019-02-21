@@ -1,4 +1,4 @@
-#include "segy.h"
+﻿#include "segy.h"
 #include <QDebug>
 GobsInterface *GobsInterface::GobsInface = NULL;
 
@@ -678,7 +678,7 @@ void gobs_write_segy_func(OpenTrace *openTr, TraceHead *headbuff, char *databuff
 {
     if(NULL == openTr)
     {
-        qDebug() << "文件信息指针为NULL。";
+        qDebug() << "文件信息指针为NULL";
         *ok = 11;
         return ;
     }

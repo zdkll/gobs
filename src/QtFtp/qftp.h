@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 **
 ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
@@ -46,11 +46,13 @@
 #include <QtCore/qobject.h>
 #include <qurlinfo.h>
 
+#include "qtftp_global.h"
+
 QT_BEGIN_NAMESPACE
 
 class QFtpPrivate;
 
-class QFtp : public QObject
+class QTFTPSHARED_EXPORT QFtp : public QObject
 {
     Q_OBJECT
 

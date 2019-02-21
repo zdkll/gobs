@@ -21,7 +21,8 @@ DEFINES += COMMMODULE_LIBRARY
 
 SOURCES += commmodule.cpp
 
-HEADERS += commmodule.h
+HEADERS += commmodule.h \
+    commmodule_global.h
 
 unix {
     target.path = /usr/lib

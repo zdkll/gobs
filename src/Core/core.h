@@ -1,4 +1,4 @@
-#ifndef CORE_H
+﻿#ifndef CORE_H
 #define CORE_H
 
 //文档文件
@@ -8,7 +8,7 @@
 
 #include "macro.h"
 
-namespace Core {
+namespace  Core {
 
 //用户根目录
 QString  homePath();

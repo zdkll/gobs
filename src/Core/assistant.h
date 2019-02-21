@@ -1,10 +1,11 @@
-#ifndef ASSISTANT_H
+﻿#ifndef ASSISTANT_H
 #define ASSISTANT_H
 
 #include <QProcess>
 #include "core.h"
+#include "core_global.h"
 
-class Assistant
+class CORESHARED_EXPORT Assistant
 {
 public:
     Assistant();

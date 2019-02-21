@@ -1,0 +1,12 @@
+﻿#ifndef COMMMODULE_GLOBAL_H
+#define COMMMODULE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(COMMMODULE_LIBRARY)
+#define COMMMODULESHARED_EXPORT  Q_DECL_EXPORT
+#else
+#define COMMMODULESHARED_EXPORT  Q_DECL_IMPORT
+#endif
+
+#endif // COMMMODULE_GLOBAL_H

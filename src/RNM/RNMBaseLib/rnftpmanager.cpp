@@ -1,6 +1,7 @@
-#include "rnftpmanager.h"
+﻿#include "rnftpmanager.h"
 #include "ui_rnftpmanager.h"
 
+#include "time.h"
 #define   Ftp_Manager_Column_Count  6
 #define   Ftp_Column_DevNo          0
 #define   Ftp_Column_State          1

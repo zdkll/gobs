@@ -22,6 +22,7 @@ SOURCES += publicwidgets.cpp \
 HEADERS += publicwidgets.h \
     publicfunctions.h \
     ToolsAlgo.h \
+    gpublicso_global.h
 
 unix {
     target.path = /usr/lib

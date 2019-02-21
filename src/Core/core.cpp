@@ -1,5 +1,6 @@
-#include "core.h"
+﻿#include "core.h"
 #include <QCoreApplication>
+
 
 QString Core::currentDirPath = QDir::currentPath();
 

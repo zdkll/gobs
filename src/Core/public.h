@@ -1,4 +1,4 @@
-#ifndef PUBLIC_H
+﻿#ifndef PUBLIC_H
 #define PUBLIC_H
 
 #include <QtCore>
@@ -152,58 +152,7 @@ struct SegyFileHandles
     SegyInfo   *segyInfo;
 };
 
-//Project，项目操作--------------------------------------------------------
-namespace Project {
-extern "C" QString projName(const ProjectInfo &);
-//创建项目文件----
-extern "C" int createProject(const ProjectInfo &);
-//检查项目文件，Id是否正确
-extern "C" int checkProject(const ProjectInfo &projInfo,QString *errorStr = 0);
 
-//查询Project 信息
-extern "C" QJsonValue getProjectInfo(const ProjectInfo &,const QString &key,int *ok = 0,QString *errorStr = 0);
-
-//修改Project 信息
-extern "C" int updateProjectInfo(const ProjectInfo &,const QString &key,const QJsonValue &value,QString *errorStr = 0);
-
-//获取完成下载的GOBS设备列表
-extern "C" QStringList finishedDownloadGOBS(const ProjectInfo &projInfo);
-
-//某台GOBS下载完成，参数为GOBS编号
-extern "C" int appendDownloadGOBS(const ProjectInfo &projInfo,const QString &gobs);
-
-}
-
-/*-----------------------------------------------------------
- *工区操作
- */
-namespace Area {
-//创建工区，工区Area文件夹(保存在pro同级目录)，包括拷贝sps文件，保存工区信息到area文件等
-extern "C" int createArea(const ProjectInfo &,const QString &areaName,const QStringList &spsFiles);
-
-extern "C" int updateArea(const ProjectInfo &,const QString &areaName
-                          ,const QStringList &spsFiles,int option);
-
-extern "C" int updateReaplceArea(const ProjectInfo &,const QString &areaName
-                          ,const QStringList &spsFiles);
-extern "C" int updateMergeArea(const ProjectInfo &,const QString &areaName
-                          ,const QStringList &spsFiles);
-
-extern "C" void calShotLineInfo(const QStringList &lineList,QMap<QString,int> &shotLineInfo);
-//项目添加工区
-extern "C" int addArea(const ProjectInfo &,const QString &areaName);
-//获取项目工区 - area list
-QStringList areasFromProject(const QString &projFile);
-
-//删除工区
-extern "C" int deleteArea(const ProjectInfo &,const QString &areaName);
-
-//读取工区sps 文件 Stringlist
-extern "C"  QStringList spsFiles(const ProjectInfo &,const QString &areaName);
-
-extern "C"  QStringList spsFiles1(const QString &projPath,const QString &areaName);
-
-}
 
 
 

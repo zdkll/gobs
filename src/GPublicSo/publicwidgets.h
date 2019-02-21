@@ -1,4 +1,4 @@
-#ifndef PUBLICWIDGETS_H
+﻿#ifndef PUBLICWIDGETS_H
 #define PUBLICWIDGETS_H
 
 #include <QWidget>
@@ -8,9 +8,11 @@
 #include <QToolButton>
 #include <QLineEdit>
 
+#include "gpublicso_global.h"
 
-class QFocusEvent;
-class QKeyEvent;
+
+class  QFocusEvent;
+class  QKeyEvent;
 
 //公共的一些控件------
 class  PublicWidgets
@@ -24,7 +26,7 @@ public:
  *点击后弹出颜色选择对话框
  *选择颜色后发送信号
  */
-class ColorPickButton: public QPushButton
+class GPUBLICSOSHARED_EXPORT   ColorPickButton: public QPushButton
 {
     Q_OBJECT
 public:
@@ -55,7 +57,7 @@ private:
 /* IPV4 输入框，可以按照格式输入并且以特定格式返回
  *
  */
-class  IpPartLineEdit : public QLineEdit
+class GPUBLICSOSHARED_EXPORT  IpPartLineEdit : public QLineEdit
 {
     Q_OBJECT
 public:
@@ -77,7 +79,7 @@ private:
     QLineEdit  *prev_tab_;
 };
 
-class IpAddrEdit : public QFrame
+class GPUBLICSOSHARED_EXPORT IpAddrEdit : public QFrame
 {
     Q_OBJECT
 public:
@@ -111,7 +113,7 @@ private:
 //--------------------------------------------
 
 //分割线
-class  GLine : public QFrame
+class GPUBLICSOSHARED_EXPORT  GLine : public QFrame
 {
 public:
     GLine(QWidget* parent = 0);
@@ -125,7 +127,7 @@ private:
 
 
 //颜色窗口 QFrame
-class ColorFrame : public QFrame
+class GPUBLICSOSHARED_EXPORT ColorFrame : public QFrame
 {
 public:
     ColorFrame(QWidget *parent = 0);
@@ -138,7 +140,7 @@ protected:
     QColor m_color;
 };
 
-class DownToolButton : public QToolButton
+class GPUBLICSOSHARED_EXPORT DownToolButton : public QToolButton
 {
     Q_OBJECT
 public:
@@ -157,7 +159,7 @@ private:
 };
 
 //提示标签
-class HintLabel
+class GPUBLICSOSHARED_EXPORT HintLabel
 {
 public:
     HintLabel(QLabel *label);

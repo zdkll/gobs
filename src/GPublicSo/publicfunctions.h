@@ -1,4 +1,4 @@
-#ifndef PUBLICFUNCTIONS_H
+﻿#ifndef PUBLICFUNCTIONS_H
 #define PUBLICFUNCTIONS_H
 
 #include <QtCore>
@@ -9,22 +9,29 @@ public:
     PublicFunctions();
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif  /* __cplusplus */
 
 //计算根据数据文件名计算时间,返回QDateTime
 //字符串格式：2017-12-31 12:36:23.234
-extern "C" QString dataFile2TimeStr(QString fnamein, double TC);
+QString dataFile2TimeStr(QString fnamein, double TC);
 
 extern QDateTime gFromDateTime;
 extern QDateTime gToDateTime;
 extern double    m_TCValue;
 
-extern "C" void  setDownloadPeriod(QDateTime fromTime,QDateTime toTime);
-extern "C" void  setTcValue(const double &value);
-extern "C" QDateTime dataFile2DateTime(QString fnamein, double TC);
+void  setDownloadPeriod(QDateTime fromTime,QDateTime toTime);
+void  setTcValue(const double &value);
+QDateTime dataFile2DateTime(QString fnamein, double TC);
 
 //判断某个文件名是否在时间段内
-extern "C" bool isFileInPeriod(const QString filename);
+bool isFileInPeriod(const QString filename);
 
-extern "C" int swap3(unsigned char* P);
+int swap3(unsigned char* P);
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
 
 #endif // PUBLICFUNCTIONS_H

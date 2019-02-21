@@ -1,4 +1,4 @@
-#ifndef SQLFUNCTIONS_H
+﻿#ifndef SQLFUNCTIONS_H
 #define SQLFUNCTIONS_H
 
 #include <QtCore>
@@ -20,7 +20,7 @@ struct Condition
 typedef Condition ResultInfo;
 
 //默认使用增删改查条件都使用 = ，多个条件之间使用 &逻辑关系
-class SqlFunctions
+class  SqlFunctions
 {
 public:
     //创建表的类型

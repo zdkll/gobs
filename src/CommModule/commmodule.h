@@ -1,11 +1,12 @@
-#ifndef COMMMODULE_H
+﻿#ifndef COMMMODULE_H
 #define COMMMODULE_H
 
 #include <QtCore>
 #include "gpublic.h"
+#include "commmodule_global.h"
 
 //模块基类
-class CommModule
+class COMMMODULESHARED_EXPORT CommModule
 {
 public:
     CommModule();
@@ -19,12 +20,13 @@ public:
 
 protected:
     //工区路径和名称
-    QString       m_projPath,m_projName;
+    QString        m_projPath,m_projName;
     ProjectInfo   m_projInfo;
 };
 
+
 //模块构造类--------
-class ModuleBuilder
+class  COMMMODULESHARED_EXPORT ModuleBuilder
 {
 public:
     ModuleBuilder(){}
