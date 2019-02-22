@@ -1,0 +1,12 @@
+﻿#ifndef  RNMBASELIB_GLOBAL_H
+#define RNMBASELIB_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(RNMBASELIB_LIBRARY)
+#define RNMBASELIBSHARED_EXPORT  Q_DECL_EXPORT
+#else
+#define RNMBASELIBSHARED_EXPORT  Q_DECL_IMPORT
+#endif
+
+#endif // RNMBASELIB_GLOBAL_H
