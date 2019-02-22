@@ -1,4 +1,4 @@
-#include "recvorientedsegy.h"
+﻿#include "recvorientedsegy.h"
 #include "gsqlfunctions.h"
 #include "gtoolsalgo.h"
 #include "gpublicfunctions.h"
@@ -463,7 +463,7 @@ DataFileInfo *RecvOrientedSegy::readDataFileInfo(DepolyedDevice *depolyedDevice)
         ok = readLogFile(dataFileInfo);
         //qDebug()<<"Tc:"<<QString::number(dataFileInfo->TC,'f',0);
         if(!ok){
-            m_errString = "Read "+depolyedDevice->dataFile+" log file failed："+m_errString;
+            m_errString ="Read "+depolyedDevice->dataFile+" log file failed："+m_errString;
             delete dataFileInfo;
             return 0;
         }

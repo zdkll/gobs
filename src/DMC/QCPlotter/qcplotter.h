@@ -1,4 +1,4 @@
-#ifndef QCPLOTTER_H
+﻿#ifndef QCPLOTTER_H
 #define QCPLOTTER_H
 
 #include <QWidget>
@@ -8,9 +8,10 @@
 
 #include "qcgraphbase.h"
 #include "gsegy.h"
+#include "qcplotter_global.h"
 
 class PlotParamDlg;
-class QCPlotter : public QWidget
+class QCPLOTTERSHARED_EXPORT QCPlotter : public QWidget
 {
     Q_OBJECT
 public:

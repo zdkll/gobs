@@ -1,4 +1,4 @@
-#ifndef QCGRAPHPUBLIC_H
+﻿#ifndef QCGRAPHPUBLIC_H
 #define QCGRAPHPUBLIC_H
 
 #include <QWidget>

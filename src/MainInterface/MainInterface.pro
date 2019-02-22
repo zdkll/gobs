@@ -18,7 +18,7 @@ DESTDIR = $$GOBS_BIN
 
 INCLUDEPATH += $$GOBS_DIR/include
 
-LIBS += -L$$GOBS_DIR/lib -lCore -lGBSqlFunctions -lGPublicSo
+LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo
 
 
 SOURCES += main.cpp\

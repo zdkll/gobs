@@ -1,4 +1,4 @@
-#ifndef LMGRPUBLIC_H
+﻿#ifndef LMGRPUBLIC_H
 #define LMGRPUBLIC_H
 
 //Color_Key---------------------------------------
@@ -18,11 +18,12 @@
 
 #include <QtCore>
 #include "gpublic.h"
+#include "areanodemanager_global.h"
 
 
 
 //公共的方法和变量
-class LmgrPublic
+class AREANODEMANAGERSHARED_EXPORT LmgrPublic
 {
 public:
     LmgrPublic();

@@ -1,4 +1,4 @@
-#ifndef RNFTPMANAGER_H
+﻿#ifndef RNFTPMANAGER_H
 #define RNFTPMANAGER_H
 
 #include <QDialog>
@@ -9,6 +9,7 @@
 #include "gpublic.h"
 #include "rnitems.h"
 #include "gpublicfunctions.h"
+#include "rnmbaselib_global.h"
 
 
 namespace Ui {
@@ -62,7 +63,7 @@ private:
 class NodeMediator;
 class QDateTimeEdit;
 //Ftp 文件管理操作
-class RNFtpManager : public QDialog
+class RNMBASELIBSHARED_EXPORT RNFtpManager : public QDialog
 {
     Q_OBJECT
 

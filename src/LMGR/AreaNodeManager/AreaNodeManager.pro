@@ -19,9 +19,11 @@ include (../../../gobs.pri)
 
 DESTDIR = $$GOBS_DIR/lib
 
+DEFINES += AREANODEMANAGER_LIBRARY
+
 INCLUDEPATH  += $$GOBS_DIR/include
 
-LIBS += -L$$GOBS_LIB -lCore -lGPublicSo -lGBSqlFunctions
+LIBS += -L$$GOBS_LIB -lCore -lGPublicSo -lSqlFunctions
 
 SOURCES += main.cpp\
         assignnodedlg.cpp \
@@ -32,7 +34,8 @@ SOURCES += main.cpp\
 HEADERS  += assignnodedlg.h \
     deploysystem.h \
     rndeployments.h \
-    lmgrpublic.h
+    lmgrpublic.h \
+    areanodemanager_global.h
 
 FORMS    += assignnodedlg.ui \
          deploysystem.ui \

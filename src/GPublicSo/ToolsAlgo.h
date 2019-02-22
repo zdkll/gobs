@@ -1,4 +1,4 @@
-#ifndef TOOLSALGO_H
+﻿#ifndef TOOLSALGO_H
 #define TOOLSALGO_H
 
 
@@ -18,7 +18,13 @@
 #define PI 3.14159265358979323746265
 #endif
 
-#include <QtCore>
+#include <stdio.h>
+#include "gpublicso_global.h"
+
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 
 /*
  *
@@ -43,9 +49,9 @@
  * 	int		*isok:		输出。函数结束后存储函数返回值。0表示函数正常结束，非0表示异常。
  *
  */
-extern "C" void gobs_1D_interpolation_regular(float *data_in, int ni1, float xii, float dxi,
-                                              float *data_out, int no1, float xoi, float dxo,
-                                              float xinl, float xinr, int inter_type, int *isok);
+GPUBLICSOSHARED_EXPORT void gobs_1D_interpolation_regular(float *data_in, int ni1, float xii, float dxi,
+                                                          float *data_out, int no1, float xoi, float dxo,
+                                                          float xinl, float xinr, int inter_type, int *isok);
 
 
 
@@ -79,8 +85,8 @@ spanned by the xin values in performed as follows:
 
 If nin==1, then the monotonically increasing case is used.
 */
-extern "C" void intlin_re(int nin, float dxi, float xii, float yin[], float yinl, float yinr,
-                          int nout, float dxo, float xoi, float yout[]);
+void intlin_re(int nin, float dxi, float xii, float yin[], float yinl, float yinr,
+               int nout, float dxo, float xoi, float yout[]);
 
 
 /*
@@ -108,19 +114,24 @@ left and right values yinl and yinr, the xout values are not restricted
 to lie within the range of sample locations defined by nxin, dxin, and
 fxin.
 */
-extern "C" void ints8r (int nxin, float dxin, float fxin, float yin[],
-                        float yinl, float yinr, int nxout, float xout[], float yout[]);
+void ints8r (int nxin, float dxin, float fxin, float yin[],
+             float yinl, float yinr, int nxout, float xout[], float yout[]);
 
 /*determine index of x with respect to an array of x values*/
-extern "C" void xindex (int nx, float ax[], float x, int *index);
+void xindex (int nx, float ax[], float x, int *index);
 
 /*interpolation function used by 1D sinc interpolation*/
-extern "C" void mksinc (float d, int lsinc, float sinc[]);
+void mksinc (float d, int lsinc, float sinc[]);
 
-extern "C" void stoepd (int n, double r[], double g[], double f[], double a[]);
+void stoepd (int n, double r[], double g[], double f[], double a[]);
 double dsinc (double x);
 
-extern "C" void intt8r (int ntable, float table[][8],
+void intt8r (int ntable, float table[][8],
 int nxin, float dxin, float fxin, float yin[], float yinl, float yinr,
 int nxout, float xout[], float yout[]);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif // TOOLSALGO_H

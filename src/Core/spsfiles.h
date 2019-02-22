@@ -1,9 +1,13 @@
-#ifndef SPSFILES_H
+﻿#ifndef SPSFILES_H
 #define SPSFILES_H
 
 #include <QtCore>
 #define  Unit_Name_Maxlen   36
 
+
+//#ifdef __cplusplus
+//extern "C" {
+//#endif  /* __cplusplus */
 
 class SPSFiles
 {
@@ -196,16 +200,22 @@ struct AreaDataInfo
 #define   SPS_READ_DATA_PTR_EMPTY     1
 #define   SPS_READ_FILE_OPEN_FAILED   2
 
+#include "core_global.h"
 //functions ,读取SR 文件，格式相同-------------------------------
-extern "C" int gobs_sps_file_SR_read(const QString &fileName,StationInfo *stationInfo);
+
+CORESHARED_EXPORT int gobs_sps_file_SR_read(const QString &fileName,StationInfo *stationInfo);
 
 //读取X文件-------------------------
-extern "C" int gobs_sps_file_X_read(const QString &fileName,RelationInfo *relationInfo);
+CORESHARED_EXPORT int gobs_sps_file_X_read(const QString &fileName,RelationInfo *relationInfo);
 
 //只读取SR 文件
-extern "C" int gobs_sps_files_SR_read(QStringList spsFileNames,AreaDataInfo *areaDataInfo,QString *errorStr = 0);
+CORESHARED_EXPORT int gobs_sps_files_SR_read(QStringList spsFileNames,AreaDataInfo *areaDataInfo,QString *errorStr = 0);
 
 //
-extern "C" int gobs_sps_files_read(QStringList spsFileNames,AreaDataInfo *areaDataInfo,QString *errorStr = 0);
+CORESHARED_EXPORT int gobs_sps_files_read(QStringList spsFileNames,AreaDataInfo *areaDataInfo,QString *errorStr = 0);
+
+//#ifdef __cplusplus
+//}
+//#endif  /* __cplusplus */
 
 #endif // SPSFILES_H

@@ -15,7 +15,7 @@ TEMPLATE = app
 include (../../../gobs.pri)
 
 
-LIBS += -L$$GOBS_LIB -lCommModule -lCore -lGPublicSo -lAreaNodeManager -lGBSqlFunctions
+LIBS += -L$$GOBS_LIB -lCommModule -lCore -lGPublicSo -lAreaNodeManager -lSqlFunctions
 
 INCLUDEPATH += ../AreaNodeManager
 

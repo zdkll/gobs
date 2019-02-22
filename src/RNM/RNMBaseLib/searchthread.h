@@ -1,14 +1,13 @@
-#ifndef SEARCHTHREAD_H
+﻿#ifndef SEARCHTHREAD_H
 #define SEARCHTHREAD_H
 
 #include <QThread>
 #include <QtCore>
 
 #include "gpublic.h"
+#include "rnmbaselib_global.h"
 
-
-
-class SearchThread : public QThread
+class RNMBASELIBSHARED_EXPORT SearchThread : public QThread
 {
     Q_OBJECT
 public:

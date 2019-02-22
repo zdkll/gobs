@@ -14,6 +14,8 @@
 #else
 #include <arpa/inet.h>
 #endif
+#include "core_global.h"
+
 /*包含Segy 头结构体
  *Segy    读写接口
  *
@@ -547,7 +549,7 @@ public:
 //=== datainfo  ： 当前数据部分信息
 //=== fileptr   ： 返回值，文件句柄，用于读写
 //=== ok        ： 返回值，成功返回0,失败返回非0
-OpenTrace *gobs_open_segy_func(const char*filename, int *mode, char *Bnary3200, BinaryHead *binary_head, SegyInfo *datainfo, int *ok);
+CORESHARED_EXPORT OpenTrace *gobs_open_segy_func(const char*filename, int *mode, char *Bnary3200, BinaryHead *binary_head, SegyInfo *datainfo, int *ok);
 
 //===读取SEGY数据接口
 //===参数说明:
@@ -558,7 +560,7 @@ OpenTrace *gobs_open_segy_func(const char*filename, int *mode, char *Bnary3200, 
 //=== databuff:  存放数据
 //=== currtrnum: 实际读取的道数
 //=== ok      ： 返回值，成功返回0，失败返回非0
-void gobs_read_segy_func(OpenTrace *openTr, long long statnum, long long trnum, TraceHead *headbuff, char *databuff, long long *currtrnum, int *ok);
+CORESHARED_EXPORT void gobs_read_segy_func(OpenTrace *openTr, long long statnum, long long trnum, TraceHead *headbuff, char *databuff, long long *currtrnum, int *ok);
 
 //===写SEGY数据接口
 //===参数说明:
@@ -568,12 +570,14 @@ void gobs_read_segy_func(OpenTrace *openTr, long long statnum, long long trnum, 
 //=== headbuff:  道头
 //=== databuff:  数据
 //=== ok      ： 返回值，成功返回0，失败返回非0
-void gobs_write_segy_func(OpenTrace *openTr, TraceHead *headbuff, char *databuff, int *ok);
+CORESHARED_EXPORT void gobs_write_segy_func(OpenTrace *openTr, TraceHead *headbuff, char *databuff, int *ok);
 
 //===关闭open时打开的文件
 //===参数说明
 //===   fileptr : open时返回的文件句柄
-void gobs_close_segy_func(OpenTrace *openTr, int *ok);
+CORESHARED_EXPORT void gobs_close_segy_func(OpenTrace *openTr, int *ok);
+
+
 #endif // SEGY
 
 

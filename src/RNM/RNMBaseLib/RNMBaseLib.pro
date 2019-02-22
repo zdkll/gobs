@@ -14,8 +14,8 @@ TARGET = RNMBaseLib
 TEMPLATE = lib
 
 include (../../../gobs.pri)
-#debug
-#CONFIG +=debug
+
+DEFINES += RNMBASELIB_LIBRARY
 
 DESTDIR = $$GOBS_DIR/lib
 
@@ -39,7 +39,8 @@ HEADERS += searchthread.h \
     rnmpublic.h \
     nodeftp.h \
     rnftpmanager.h \
-    statusreport.h
+    statusreport.h \
+    rnmbaselib_global.h
 
 FORMS += \
     rnftpmanager.ui \

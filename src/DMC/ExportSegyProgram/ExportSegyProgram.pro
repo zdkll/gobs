@@ -23,7 +23,7 @@ DESTDIR   = $$GOBS_DIR/bin
 
 #INCLUDEPATH +=
 
-LIBS    += -L$$GOBS_DIR/lib -lCore -lGBSqlFunctions -lGPublicSo
+LIBS    += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo
 
 SOURCES += main.cpp \
     abstractsegyproducer.cpp \

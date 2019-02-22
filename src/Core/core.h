@@ -7,29 +7,29 @@
 #include <QtCore>
 
 #include "macro.h"
+#include "core_global.h"
 
-namespace  Core {
-
+namespace Core {
 //用户根目录
-QString  homePath();
+CORESHARED_EXPORT QString  homePath();
 
 //文档目录
-const QString docmentsPath();
+CORESHARED_EXPORT const QString docmentsPath();
 
 //创建文档目录
-bool createDocDir();
+CORESHARED_EXPORT bool createDocDir();
 
 //程序文件目录
-const QString rootPath();
+CORESHARED_EXPORT const QString rootPath();
 
 //删除文件夹
-bool deleteDirectory(const QString &path);
+CORESHARED_EXPORT bool deleteDirectory(const QString &path);
 
-QJsonObject readJsonDoc(const QString &fileName);
+CORESHARED_EXPORT QJsonObject readJsonDoc(const QString &fileName);
 
-bool saveJsonObject(const QJsonObject &obj,const QString &fileName);
+CORESHARED_EXPORT bool saveJsonObject(const QJsonObject &obj,const QString &fileName);
 
-extern QString currentDirPath;
+CORESHARED_EXPORT extern QString currentDirPath;
 }
 
 

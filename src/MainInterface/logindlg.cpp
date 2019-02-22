@@ -261,9 +261,9 @@ void ChangePasswordDlg::createDialog()
     connect(okBtn,&QPushButton::clicked,this,&ChangePasswordDlg::slotChangePwd);
     connect(cancelBtn,&QPushButton::clicked,[this]{clearInput();this->reject();});
 
-    connect(m_oldPwdEdit,&QLineEdit::textChanged,this,ChangePasswordDlg::slotOldPwdChanged);
-    connect(m_newPwdEdit1,&QLineEdit::textChanged,this,ChangePasswordDlg::slotNewPwd1Changed);
-    connect(m_newPwdEdit2,&QLineEdit::textChanged,this,ChangePasswordDlg::slotNewPwd2Changed);
+    connect(m_oldPwdEdit,&QLineEdit::textChanged,this,&ChangePasswordDlg::slotOldPwdChanged);
+    connect(m_newPwdEdit1,&QLineEdit::textChanged,this,&ChangePasswordDlg::slotNewPwd1Changed);
+    connect(m_newPwdEdit2,&QLineEdit::textChanged,this,&ChangePasswordDlg::slotNewPwd2Changed);
 
     pwdGridLayout->setColumnStretch(0,1);
     pwdGridLayout->setColumnStretch(1,1);

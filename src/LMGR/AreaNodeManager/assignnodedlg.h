@@ -1,4 +1,4 @@
-#ifndef ASSIGNNODEDLG_H
+﻿#ifndef ASSIGNNODEDLG_H
 #define ASSIGNNODEDLG_H
 
 #include <QDialog>
@@ -6,6 +6,7 @@
 
 #include "gpublic.h"
 #include "lmgrpublic.h"
+#include "areanodemanager_global.h"
 
 namespace Ui {
 class AssignNodeDlg;
@@ -65,7 +66,7 @@ private:
     QMap<int,NodeDevice *> m_assignedDevices;
 };
 
-class AssignNodeDlg : public QDialog
+class AREANODEMANAGERSHARED_EXPORT AssignNodeDlg : public QDialog
 {
     Q_OBJECT
 

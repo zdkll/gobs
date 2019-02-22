@@ -1,17 +1,18 @@
-#ifndef DEPLOYSYSTEM_H
+﻿#ifndef DEPLOYSYSTEM_H
 #define DEPLOYSYSTEM_H
 
 #include <QDialog>
 #include <QTcpSocket>
 
 #include "gpublic.h"
+#include "areanodemanager_global.h"
 
 namespace Ui {
 class DeploySystem;
 }
 
 //设备扫描系统
-class DeploySystem : public QDialog
+class AREANODEMANAGERSHARED_EXPORT DeploySystem : public QDialog
 {
     Q_OBJECT
 

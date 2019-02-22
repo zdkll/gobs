@@ -1,4 +1,4 @@
-#ifndef RNITEMS_H
+﻿#ifndef RNITEMS_H
 #define RNITEMS_H
 
 #define Group_Node_Num         15
@@ -27,13 +27,13 @@
 #include <QMetaType>//记得包含这个头文件
 
 #include "gpublic.h"
-
 #include "rnmpublic.h"
+#include "rnmbaselib_global.h"
 
 //节点项目,实现状态刷新线程任务
 class GroupBoxItem;
 class StatusControler;
-class NodeItem : public QGraphicsItem
+class RNMBASELIBSHARED_EXPORT NodeItem : public QGraphicsItem
 {
 public:
     NodeItem(Node *node,QGraphicsItem *parent = 0);
@@ -56,16 +56,16 @@ public:
 
 private:
     static QSize  m_size;
-    Node         *m_node;
-    int           m_id;
-    int           m_groupId;
-    QColor            m_color;
+    Node           *m_node;
+    int                 m_id;
+    int                 m_groupId;
+    QColor          m_color;
 };
 
 
 class DeviceItem;
 //默认按照15台节点设备摆放,每3台为一单元
-class GroupBoxItem : public QGraphicsItem
+class RNMBASELIBSHARED_EXPORT GroupBoxItem : public QGraphicsItem
 {
 public:
     GroupBoxItem(QGraphicsItem *parent = 0);
@@ -98,7 +98,7 @@ private:
 };
 
 
-class DeviceItem : public QGraphicsItem
+class RNMBASELIBSHARED_EXPORT DeviceItem : public QGraphicsItem
 {
 public:
     enum InterfaceStatus

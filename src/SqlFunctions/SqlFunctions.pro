@@ -8,11 +8,13 @@
 QT       += core sql
 
 
-TARGET = GBSqlFunctions
+TARGET = SqlFunctions
 
 TEMPLATE = lib
 
 include (../../gobs.pri)
+
+DEFINES += SQLFUNCTIONS_LIBRARY
 
 DESTDIR = $$GOBS_DIR/lib
 
@@ -22,3 +24,4 @@ SOURCES += main.cpp \
 HEADERS += \
     sqlfunctions.h \
     sqlmacro.h \
+    sqlfunctions_global.h

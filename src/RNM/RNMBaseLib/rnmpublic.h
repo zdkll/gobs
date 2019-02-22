@@ -1,4 +1,4 @@
-#ifndef RNMPUBLIC_H
+﻿#ifndef RNMPUBLIC_H
 #define RNMPUBLIC_H
 
 typedef int UpdateCmd;
@@ -21,6 +21,8 @@ typedef int UpdateCmd;
 
 #include <QtCore>
 #include <QColor>
+
+#include "rnmbaselib_global.h"
 
 enum LimitOperation
 {
@@ -93,7 +95,8 @@ enum DownloadType
     DownloadInPeriod =1
 };
 
-extern "C" QString workName(const int &work);
+
+QString workName(const int &work);
 
 //Node Status Color-----------------
 const QColor Node_Status_Disable_Color = QColor(Qt::lightGray);
@@ -103,8 +106,15 @@ const QColor Node_Status_Error_Color   = QColor(Qt::red);
 const QColor Node_SelfTest_Warning_Color= QColor(Qt::red);
 const QColor Node_Downloaded_Color      = QColor(Qt::blue);
 
-extern "C" bool isNodeIP(const uint &ipV4);
-extern "C" uint ip2DeviceNo(const uint &ipV4);
+#ifdef __cplusplus
+extern "C"{
+#endif
+
+RNMBASELIBSHARED_EXPORT  bool isNodeIP(const uint &ipV4);
+RNMBASELIBSHARED_EXPORT  uint ip2DeviceNo(const uint &ipV4);
+#ifdef __cplusplus
+}
+#endif
 
 class NodeItem;
 class NodeMediator;
@@ -113,7 +123,7 @@ class StatusControler;
 class FtpManager;
 
 //节点对象
-class Node : public QObject
+class RNMBASELIBSHARED_EXPORT Node : public QObject
 {
     Q_OBJECT
 public:
@@ -272,7 +282,7 @@ private:
 };
 
 //状态控制
-class StatusControler
+class RNMBASELIBSHARED_EXPORT StatusControler
 {
 public:
     void setFilters(const int &status);
@@ -300,7 +310,7 @@ private:
 class RNFtpManager;
 class StatusReportDlg;
 //中介者，用于Node 和FtpManager,StatusReport 之间通信
-class NodeMediator : public QObject
+class RNMBASELIBSHARED_EXPORT NodeMediator : public QObject
 {
     Q_OBJECT
 public:

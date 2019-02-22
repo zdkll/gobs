@@ -1,10 +1,11 @@
-#ifndef RNDEPLOYMENTS_H
+﻿#ifndef RNDEPLOYMENTS_H
 #define RNDEPLOYMENTS_H
 
 #include <QDialog>
 #include <QDateTime>
 
 #include "gpublic.h"
+#include "areanodemanager_global.h"
 
 namespace Ui {
 class RNDeployments;
@@ -35,7 +36,7 @@ struct NodeTimeInfo
 };
 
 //坐标编辑对话框
-class EditCoordDlg : public QDialog
+class AREANODEMANAGERSHARED_EXPORT EditCoordDlg : public QDialog
 {
     Q_OBJECT
 public:
@@ -57,9 +58,8 @@ private:
 };
 
 
-
 //时间编辑对话框
-class EditDataTimeDlg : public QDialog
+class AREANODEMANAGERSHARED_EXPORT EditDataTimeDlg : public QDialog
 {
     Q_OBJECT
 public:
@@ -101,7 +101,7 @@ struct RemoteNode
 };
 
 //显示设备总体信息，统一的映射信息管理，包括界面显示的设备信息来自这里
-class RNDeployments : public QDialog
+class AREANODEMANAGERSHARED_EXPORT RNDeployments : public QDialog
 {
     Q_OBJECT
 

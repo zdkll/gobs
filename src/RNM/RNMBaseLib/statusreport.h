@@ -1,4 +1,4 @@
-#ifndef STATUSREPORT_H
+﻿#ifndef STATUSREPORT_H
 #define STATUSREPORT_H
 
 #include <QDialog>
@@ -9,6 +9,7 @@
 #include <QModelIndex>
 
 #include "rnmpublic.h"
+#include "rnmbaselib_global.h"
 
 
 namespace Ui {
@@ -53,7 +54,7 @@ protected:
 };
 
 //Status Report对话框
-class StatusReportDlg : public QDialog
+class  RNMBASELIBSHARED_EXPORT StatusReportDlg : public QDialog
 {
     Q_OBJECT
 public:

@@ -5,6 +5,7 @@
 #include <QtSql>
 
 #include "sqlmacro.h"
+#include "sqlfunctions_global.h"
 
 typedef QString GobsTable;
 #define Node_DevInfo_TABLE   "NodeDevicesTable" //节点设备表
@@ -20,7 +21,7 @@ struct Condition
 typedef Condition ResultInfo;
 
 //默认使用增删改查条件都使用 = ，多个条件之间使用 &逻辑关系
-class  SqlFunctions
+class  SQLFUNCTIONSSHARED_EXPORT SqlFunctions
 {
 public:
     //创建表的类型

@@ -19,6 +19,7 @@ include(../../../gobs.pri)
 
 DESTDIR   = $$GOBS_DIR/lib
 
+DEFINES += QCPLOTTER_LIBRARY
 
 LIBS      += -L$$GOBS_DIR/lib -lGPublicSo
 
@@ -31,7 +32,8 @@ SOURCES += main.cpp\
 HEADERS  += qcplotter.h \
     qcgraphbase.h \
     graphbase_2d.h \
-    qcgraphpublic.h
+    qcgraphpublic.h \
+    qcplotter_global.h
 
 FORMS    += qcplotter.ui \
     traceheaddlg.ui
