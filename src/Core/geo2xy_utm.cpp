@@ -1,7 +1,8 @@
 #include "geo2xy_utm.h"
+#include <math.h>
 
 #ifndef PI
-#define PI 3.14159
+#define PI 3.1415923
 #endif
 
 short getUTMZone(double lat, double lon);

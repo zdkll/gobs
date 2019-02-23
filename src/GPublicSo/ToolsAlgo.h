@@ -19,6 +19,7 @@
 #endif
 
 #include <stdio.h>
+#include <cmath>
 #include "gpublicso_global.h"
 
 #ifdef __cplusplus

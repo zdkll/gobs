@@ -1,16 +1,20 @@
 #GOBS_ROOT,此环境变量根据具体代码安装目录设置
 GOBS_DIR = $$PWD
 
-INCLUDEPATH += $$GOBS_DIR/include
+GOBS_LIB   = $$GOBS_DIR/lib
+GOBS_BIN  = $$GOBS_DIR/bin
+GOBS_SRC = $$GOBS_DIR/src
 
-
-GOBS_LIB = $$GOBS_DIR/lib
-GOBS_BIN = $$GOBS_DIR/bin
-
+INCLUDEPATH += $$GOBS_DIR/include \
+                           $$GOBS_SRC/Core  \
 
 contains(TEMPLATE,lib){
+DESTDIR =$$GOBS_LIB
 DLLDESTDIR = $$GOBS_BIN
+}else{
+DESTDIR =$$GOBS_BIN
 }
+
 
 #定义拷贝头文件
 #defineTest(copyHeaders){

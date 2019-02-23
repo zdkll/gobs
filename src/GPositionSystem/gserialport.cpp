@@ -64,7 +64,7 @@ void GSerialPort::close()
 
 void GSerialPort::slotReadyRead()
 {
-    //    m_byteArray += m_serialPort->readAll();
+    //m_byteArray += m_serialPort->readAll();
 
     //模拟---begin-----
     // 080944.00
@@ -89,6 +89,7 @@ void GSerialPort::slotReadyRead()
 
             //获取地球坐标
             GpsCoord cord =  GPGGAStr2Cord(gpgga_string);
+            qDebug()<<cord.x<<cord.y;
             //计算物理坐标
             emit recvGpsCord(cord.toXy());
 
@@ -119,18 +120,27 @@ GpsCoord GSerialPort::GPGGAStr2Cord(const QString& in_str)
             dateTime.setTimeSpec(Qt::UTC);
             QTime utcTime= QTime::fromString(text.left(text.size()-3),"hh:mm:ss");
             dateTime.setTime(utcTime);
-            gpsCord.utc_msec = dateTime.toTime_t();
+            gpsCord.utc_sec = dateTime.toTime_t();
         }
 
         //纬度
-        if(idx == 1)
-            gpsCord.x  = text.toDouble();
+        if(idx == 1){
+            gpsCord.y  = text.left(2).toInt() + text.right(7).toDouble()/60.f;
+        }else if(idx == 2){
+            if(text == "S") //南半球
+                gpsCord.y = -gpsCord.y;
+        }
+
         //经度
-        if(idx == 3)
-            gpsCord.y  = text.toDouble();
+        else if(idx == 3){
+            gpsCord.x  = text.left(3).toInt() + text.right(7).toDouble()/60.f;
+        }else if(idx == 4){
+            if(text == "W") //西经
+                gpsCord.x = -gpsCord.x;
+        }
 
         idx++;
-    }while(idx<4);
+    }while(idx<=4);
 
     return gpsCord;
 }

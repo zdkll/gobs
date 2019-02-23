@@ -163,7 +163,7 @@ struct GpsCoord
         geo2xy_utm(this->x,this->y,&xyCord.x,&xyCord.y);
         return xyCord;
     }
-    quint32  utc_msec = 0; //utc毫秒
+    quint32  utc_sec = 0; //utc毫秒
     double x;
     double y;
 };

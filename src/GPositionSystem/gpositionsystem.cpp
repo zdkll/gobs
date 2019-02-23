@@ -40,7 +40,13 @@ void GPositionSystem::stopPostion()
 
 void GPositionSystem::slotRecvGpsCord(const GpsCoord& cord)
 {
-//    qDebug()<<"recv gps cord:"<<cord.x<<cord.y;
+    if(cord.utc_sec == 0){
+
+        return;
+    }
+    qDebug()<<"recv gps cord:"<<cord.utc_sec<<cord.x<<cord.y;
+
+
 
 }
 
