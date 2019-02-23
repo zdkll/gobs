@@ -25,6 +25,7 @@ public:
 
 signals:
     void recvGpsCord(const GpsCoord& );
+    void gpsErrorOccurs();
 
 protected slots:
     void slotReadyRead();
@@ -36,6 +37,7 @@ private:
     Ui::GSerialPort *ui;
     QSerialPort *m_serialPort;
     QByteArray  m_byteArray;
+    QTimer   *m_timer = Q_NULLPTR;
 
     static QMap<int,QSerialPort::BaudRate>   mpBaudRate;
     static QMap<int,QSerialPort::DataBits>     mpDatabit;

@@ -1,9 +1,9 @@
 #include "gserialport.h"
 #include "ui_gserialport.h"
 
-#define GPGGA_STRING  "$GPGGA"
-
 #include "geo2xy_utm.h"
+
+#define GPGGA_STRING  "$GPGGA"
 
 #include <QSerialPortInfo>
 #include <QMessageBox>
@@ -45,7 +45,16 @@ bool GSerialPort::open()
     m_serialPort->setParity(mpParity.value(ui->parityCbx->currentIndex()));
     m_serialPort->setFlowControl(mpFlowControl.value(ui->flowControlCbx->currentIndex()));
 
-    return  m_serialPort->open(QIODevice::ReadWrite);
+    //    return  m_serialPort->open(QIODevice::ReadWrite);
+
+    //模拟---begin-----
+    if(!m_timer){
+        m_timer = new QTimer(this);
+        connect(m_timer,&QTimer::timeout,this,&GSerialPort::slotReadyRead);
+    }
+    m_timer->start(1000);
+    return true;
+    //模拟---end-----
 }
 void GSerialPort::close()
 {
@@ -55,7 +64,13 @@ void GSerialPort::close()
 
 void GSerialPort::slotReadyRead()
 {
-    m_byteArray += m_serialPort->readAll();
+    //    m_byteArray += m_serialPort->readAll();
+
+    //模拟---begin-----
+    // 080944.00
+    m_byteArray = QString("$GPGGA,%1.00,3117.70409,N,12131.91747,E,1,02,2.49,48.3,M,9.9,M,,*5D\r\n")
+            .arg(QDateTime::currentDateTimeUtc().time().toString("HH:mm:ss")).toLocal8Bit();
+    //模拟---end-----
 
     QString text = QString(m_byteArray);
 
@@ -72,8 +87,10 @@ void GSerialPort::slotReadyRead()
         if(index >= 0){
             QString gpgga_string = text.left(index+1);
 
+            //获取地球坐标
             GpsCoord cord =  GPGGAStr2Cord(gpgga_string);
-            emit recvGpsCord(cord);
+            //计算物理坐标
+            emit recvGpsCord(cord.toXy());
 
             //移除该段
             m_byteArray.mid(index+1);
@@ -84,18 +101,38 @@ void GSerialPort::slotReadyRead()
 GpsCoord GSerialPort::GPGGAStr2Cord(const QString& in_str)
 {
     qDebug()<<"recv gpgga string:"<<in_str;
-    //解析时间
-    QString utc_str =   in_str.mid(7,10);
-    QString ret_str = in_str.mid(17);
+    GpsCoord gpsCord;
+    QString ret_str = in_str.mid(7);
+    int idx = 0;
+    do{
+        int index = ret_str.indexOf(",");
+        if(index<1){
+            return  GpsCoord();
+            break;
+        }
+        QString text = ret_str.left(index);
+        ret_str = ret_str.mid(index+1);
 
-    //纬度
-    QString longitude_str = ret_str.mid(1,9);
-    ret_str = ret_str.mid(11);
+        //utc
+        if(idx == 0){
+            QDateTime dateTime =QDateTime::currentDateTimeUtc();
+            dateTime.setTimeSpec(Qt::UTC);
+            QTime utcTime= QTime::fromString(text.left(text.size()-3),"hh:mm:ss");
+            dateTime.setTime(utcTime);
+            gpsCord.utc_msec = dateTime.toTime_t();
+        }
 
-    //经度
-    QString latitude_str = ret_str.mid(3,10);
+        //纬度
+        if(idx == 1)
+            gpsCord.x  = text.toDouble();
+        //经度
+        if(idx == 3)
+            gpsCord.y  = text.toDouble();
 
-    qDebug()<<utc_str<<longitude_str<<latitude_str;
+        idx++;
+    }while(idx<4);
+
+    return gpsCord;
 }
 
 void GSerialPort::initWg()

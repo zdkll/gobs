@@ -6,6 +6,7 @@
 
 #include "macro.h"
 #include "segy.h"
+#include "geo2xy_utm.h"
 
 //qunit32 ,IP地址值范围
 typedef QPair<uint,uint> IPScope;
@@ -156,7 +157,13 @@ struct SegyFileHandles
 //GPS 坐标
 struct GpsCoord
 {
-    qint64  utc_msec; //utc毫秒
+    GpsCoord(){}
+    GpsCoord toXy(){
+        GpsCoord xyCord = *this;
+        geo2xy_utm(this->x,this->y,&xyCord.x,&xyCord.y);
+        return xyCord;
+    }
+    quint32  utc_msec = 0; //utc毫秒
     double x;
     double y;
 };

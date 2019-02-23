@@ -41,6 +41,7 @@ void GPositionSystem::stopPostion()
 void GPositionSystem::slotRecvGpsCord(const GpsCoord& cord)
 {
 //    qDebug()<<"recv gps cord:"<<cord.x<<cord.y;
+
 }
 
 void GPositionSystem::createWg()
@@ -54,7 +55,7 @@ void GPositionSystem::createWg()
     leftLayout->addWidget(m_gSerialPort);
 
     //button
-    m_startBtn   = new QPushButton(QStringLiteral("开始GPS定位"),this);
+    m_startBtn = new QPushButton(QStringLiteral("开始GPS定位"),this);
     m_stopBtn = new QPushButton(QStringLiteral("停止"),this);
     QHBoxLayout *btnLayout = new QHBoxLayout;
     btnLayout->addWidget(m_startBtn);
