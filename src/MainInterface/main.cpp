@@ -4,6 +4,7 @@
 #include <QDebug>
 
 #include "logindlg.h"
+#include "gpositionsystem.h"
 
 using namespace Core;
 
@@ -25,10 +26,14 @@ int main(int argc, char *argv[])
 
 //    int ret;
 //    if(dlg.exec()){
-        MainWindow w;
-        w.show();
-      int  ret = a.exec();
+//        MainWindow w;
+//        w.show();
+//      int  ret = a.exec();
+
+    GPositionSystem w;
+    w.show();
+
 //    }
 
-    return ret;
+    return a.exec();
 }

@@ -17,7 +17,7 @@ TEMPLATE = lib
 
 include(../../../gobs.pri)
 
-DESTDIR   = $$GOBS_DIR/lib
+
 
 DEFINES += QCPLOTTER_LIBRARY
 

@@ -21,8 +21,8 @@ enum Node_Status
     Voltage     = 1,
     Temperature = 2,
     Pressure    = 3,
-//    EleCurr     = 4,
-//    ChargeVolt  = 5,
+    //    EleCurr     = 4,
+    //    ChargeVolt  = 5,
     Memory_Capacity  = 4,
     SelfTest    = 5,   //所有参数自检状态
     DownLoad    = 6
@@ -153,6 +153,13 @@ struct SegyFileHandles
 };
 
 
+//GPS 坐标
+struct GpsCoord
+{
+    qint64  utc_msec; //utc毫秒
+    double x;
+    double y;
+};
 
 
 

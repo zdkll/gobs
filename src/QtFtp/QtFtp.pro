@@ -15,7 +15,6 @@ include(../../gobs.pri)
 
 DEFINES += QTFTP_LIBRARY
 
-DESTDIR = $$GOBS_LIB
 
 SOURCES += qftp.cpp \
     qurlinfo.cpp

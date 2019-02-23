@@ -6,6 +6,7 @@ SUBDIRS +=    \
     CommModule   \
     GPublicSo   \
     SqlFunctions \
+    GPositionSystem \
     LMGR \
     RNM  \
     DMC  \

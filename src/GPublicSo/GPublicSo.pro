@@ -11,7 +11,6 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-DESTDIR = $$GOBS_LIB
 DEFINES += GPUBLICSO_LIBRARY
 
 

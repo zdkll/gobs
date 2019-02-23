@@ -16,7 +16,6 @@ include (../../gobs.pri)
 
 DEFINES += SQLFUNCTIONS_LIBRARY
 
-DESTDIR = $$GOBS_DIR/lib
 
 SOURCES += main.cpp \
     sqlfunctions.cpp

@@ -18,7 +18,6 @@ include (../../../gobs.pri)
 LIBS += -L$$GOBS_LIB  -lCommModule -lCore -lGPublicSo -lRNMBaseLib -lQtFtp
 
 
-DESTDIR = $$GOBS_DIR/bin
 
 INCLUDEPATH += $$GOBS_DIR/include  \
       $$GOBS_DIR/src/QtFtp

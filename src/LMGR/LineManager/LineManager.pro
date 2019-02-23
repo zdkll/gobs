@@ -19,10 +19,6 @@ LIBS += -L$$GOBS_LIB -lCommModule -lCore -lGPublicSo -lAreaNodeManager -lSqlFunc
 
 INCLUDEPATH += ../AreaNodeManager
 
-DESTDIR = $$GOBS_DIR/bin
-
-#debug
-#CONFIG += debug
 
 SOURCES += main.cpp\
         linemanager.cpp \

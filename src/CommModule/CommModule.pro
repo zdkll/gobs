@@ -15,7 +15,7 @@ include(../../gobs.pri)
 
 LIBS += -L$$GOBS_DIR/lib -lCore
 
-DESTDIR = $$GOBS_DIR/lib
+
 
 DEFINES += COMMMODULE_LIBRARY
 

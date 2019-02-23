@@ -12,7 +12,7 @@ CONFIG += plugin
 
 include (../../gobs.pri)
 
-DESTDIR = $$GOBS_LIB
+
 
 DEFINES += CORE_LIBRARY
 
@@ -21,7 +21,8 @@ SOURCES += \
     spsfiles.cpp \
     segy.cpp \
     assistant.cpp \
-    projectarea.cpp
+    projectarea.cpp \
+    geo2xy_utm.cpp
 
 HEADERS += \
     core.h \
@@ -31,7 +32,8 @@ HEADERS += \
     segy.h \
     assistant.h \
     core_global.h \
-    projectarea.h
+    projectarea.h \
+    geo2xy_utm.h
 
 win32{
 LIBS += -lwsock32

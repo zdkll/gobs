@@ -17,7 +17,6 @@ include (../../../gobs.pri)
 
 LIBS += -L$$GOBS_LIB  -lCore -lCommModule -lGPublicSo -lQCPlotter
 
-DESTDIR = $$GOBS_DIR/bin
 
 INCLUDEPATH += ../QCPlotter
 

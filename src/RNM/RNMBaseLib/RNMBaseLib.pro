@@ -17,7 +17,6 @@ include (../../../gobs.pri)
 
 DEFINES += RNMBASELIB_LIBRARY
 
-DESTDIR = $$GOBS_DIR/lib
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lGPublicSo -lQtFtp
 

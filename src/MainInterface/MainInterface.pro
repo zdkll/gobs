@@ -14,11 +14,12 @@ TEMPLATE = app
 
 include(../../gobs.pri)
 
-DESTDIR = $$GOBS_BIN
 
 INCLUDEPATH += $$GOBS_DIR/include
 
-LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo
+INCLUDEPATH += $$GOBS_SRC/GPositionSystem
+
+LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem
 
 
 SOURCES += main.cpp\

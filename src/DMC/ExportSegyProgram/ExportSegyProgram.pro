@@ -17,7 +17,6 @@ TEMPLATE = app
 
 include(../../../gobs.pri)
 
-DESTDIR   = $$GOBS_DIR/bin
 
 #CONFIG  += debug
 

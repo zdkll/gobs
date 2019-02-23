@@ -17,7 +17,7 @@ include (../../../gobs.pri)
 #debug
 #CONFIG += debug
 
-DESTDIR = $$GOBS_DIR/lib
+
 
 DEFINES += AREANODEMANAGER_LIBRARY
 
