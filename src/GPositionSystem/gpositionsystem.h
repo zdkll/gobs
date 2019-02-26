@@ -1,9 +1,9 @@
-#ifndef GPOSITIONSYSTEM_H
+﻿#ifndef GPOSITIONSYSTEM_H
 #define GPOSITIONSYSTEM_H
 
 #include <QWidget>
 #include "gpositionsystem_global.h"
-#include "public.h"
+#include "gpspublic.h"
 
 namespace Ui {
 class GPositionSystem;

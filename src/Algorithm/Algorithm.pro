@@ -9,12 +9,18 @@ QT       -= gui
 TARGET = Algorithm
 TEMPLATE = lib
 
+include(../../gobs.pri)
+
 DEFINES += ALGORITHM_LIBRARY
 
-SOURCES += algorithm.cpp
+SOURCES += algorithm.cpp \
+    geo2xy_utm.cpp \
+    gobs_interpolation.cpp
 
 HEADERS += algorithm.h\
-        algorithm_global.h
+        algorithm_global.h \
+        geo2xy_utm.h \
+        ToolsAlgo.h
 
 unix {
     target.path = /usr/lib

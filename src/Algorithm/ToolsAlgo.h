@@ -20,7 +20,8 @@
 
 #include <stdio.h>
 #include <cmath>
-#include "gpublicso_global.h"
+
+#include "algorithm_global.h"
 
 #ifdef __cplusplus
 extern "C"{
@@ -50,7 +51,7 @@ extern "C"{
  * 	int		*isok:		输出。函数结束后存储函数返回值。0表示函数正常结束，非0表示异常。
  *
  */
-GPUBLICSOSHARED_EXPORT void gobs_1D_interpolation_regular(float *data_in, int ni1, float xii, float dxi,
+ALGORITHMSHARED_EXPORT void gobs_1D_interpolation_regular(float *data_in, int ni1, float xii, float dxi,
                                                           float *data_out, int no1, float xoi, float dxo,
                                                           float xinl, float xinr, int inter_type, int *isok);
 

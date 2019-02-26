@@ -17,12 +17,10 @@ TEMPLATE = app
 
 include(../../../gobs.pri)
 
+LIBS    += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo  -lAlgorithm
 
-#CONFIG  += debug
+INCLUDEPATH += $$GOBS_SRC/Algorithm
 
-#INCLUDEPATH +=
-
-LIBS    += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo
 
 SOURCES += main.cpp \
     abstractsegyproducer.cpp \

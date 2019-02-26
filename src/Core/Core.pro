@@ -21,8 +21,7 @@ SOURCES += \
     spsfiles.cpp \
     segy.cpp \
     assistant.cpp \
-    projectarea.cpp \
-    geo2xy_utm.cpp
+    projectarea.cpp
 
 HEADERS += \
     core.h \
@@ -32,8 +31,7 @@ HEADERS += \
     segy.h \
     assistant.h \
     core_global.h \
-    projectarea.h \
-    geo2xy_utm.h
+    projectarea.h
 
 win32{
 LIBS += -lwsock32

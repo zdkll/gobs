@@ -21,7 +21,9 @@ include(../../../gobs.pri)
 
 DEFINES += QCPLOTTER_LIBRARY
 
-LIBS      += -L$$GOBS_DIR/lib -lGPublicSo
+LIBS      += -L$$GOBS_DIR/lib -lGPublicSo -lAlgorithm
+
+INCLUDEPATH += $$GOBS_SRC/Algorithm
 
 SOURCES += main.cpp\
         qcplotter.cpp \

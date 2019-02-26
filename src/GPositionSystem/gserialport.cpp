@@ -1,4 +1,4 @@
-#include "gserialport.h"
+﻿#include "gserialport.h"
 #include "ui_gserialport.h"
 
 #include "geo2xy_utm.h"
@@ -8,6 +8,8 @@
 #include <QSerialPortInfo>
 #include <QMessageBox>
 #include <QDebug>
+#include <QTimer>
+#include <QDateTime>
 
 QMap<int,QSerialPort::BaudRate>   GSerialPort::mpBaudRate =
         QMap<int,QSerialPort::BaudRate>({{0,QSerialPort::Baud9600},{1,QSerialPort::Baud115200}});

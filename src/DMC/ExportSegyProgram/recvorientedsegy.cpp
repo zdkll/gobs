@@ -1,6 +1,6 @@
 ﻿#include "recvorientedsegy.h"
 #include "gsqlfunctions.h"
-#include "gtoolsalgo.h"
+#include "toolsalgo.h"
 #include "gpublicfunctions.h"
 
 #define  DataFileList       "DataFile.lst"

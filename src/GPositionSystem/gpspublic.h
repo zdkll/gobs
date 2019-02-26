@@ -1,20 +1,17 @@
-﻿#ifndef GPSPUBLICDEF_H
-#define GPSPUBLICDEF_H
+﻿#ifndef GPSPUBLIC_H
+#define GPSPUBLIC_H
 
-#include "geo2xy_utm.h"
+#include <QtGlobal>
 
 //GPS 坐标
-struct GpsCoord
+struct   GpsCoord
 {
-    GpsCoord(){}
-    GpsCoord toXy(){
-        GpsCoord xyCord = *this;
-        geo2xy_utm(this->x,this->y,&xyCord.x,&xyCord.y);
-        return xyCord;
-    }
+    GpsCoord();
+    GpsCoord toXy();
+
     quint32  utc_sec = 0; //utc毫秒
     double x;
     double y;
 };
 
-#endif // GPSPUBLICDEF_H
+#endif // GPSPUBLIC_H

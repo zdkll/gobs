@@ -15,10 +15,11 @@ TEMPLATE = app
 include (../../../gobs.pri)
 
 
-LIBS += -L$$GOBS_LIB  -lCore -lCommModule -lGPublicSo -lQCPlotter
+LIBS += -L$$GOBS_LIB  -lCore -lCommModule -lGPublicSo -lQCPlotter -lAlgorithm
 
 
-INCLUDEPATH += ../QCPlotter
+INCLUDEPATH += ../QCPlotter \
+               $$GOBS_SRC/Algorithm
 
 #debug
 #CONFIG += debug

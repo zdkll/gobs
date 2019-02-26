@@ -15,12 +15,10 @@ DEFINES += GPUBLICSO_LIBRARY
 
 
 SOURCES += publicwidgets.cpp \
-    publicfunctions.cpp \
-    gobs_interpolation.cpp
+    publicfunctions.cpp
 
 HEADERS += publicwidgets.h \
     publicfunctions.h \
-    ToolsAlgo.h \
     gpublicso_global.h
 
 unix {

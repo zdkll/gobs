@@ -1,9 +1,10 @@
-#include "gpositionsystem.h"
+﻿#include "gpositionsystem.h"
 #include "ui_gpositionsystem.h"
 
 #include <QBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QDebug>
 
 #include "gserialport.h"
 
@@ -46,8 +47,6 @@ void GPositionSystem::slotRecvGpsCord(const GpsCoord& cord)
     }
     qDebug()<<"recv gps cord:"<<cord.utc_sec<<cord.x<<cord.y;
 
-
-
 }
 
 void GPositionSystem::createWg()
@@ -76,6 +75,6 @@ void GPositionSystem::createWg()
 
     this->setLayout(mainLayout);
 
-    connect(m_startBtn,&QPushButton::clicked,this,GPositionSystem::startPostion);
-    connect(m_stopBtn,&QPushButton::clicked,this,GPositionSystem::stopPostion);
+    connect(m_startBtn,&QPushButton::clicked,this,&GPositionSystem::startPostion);
+    connect(m_stopBtn,&QPushButton::clicked,this,&GPositionSystem::stopPostion);
 }

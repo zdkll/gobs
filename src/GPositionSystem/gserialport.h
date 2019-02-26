@@ -1,10 +1,10 @@
-#ifndef GSERIALPORT_H
+﻿#ifndef GSERIALPORT_H
 #define GSERIALPORT_H
 
 #include <QWidget>
 #include <QSerialPort>
 
-#include "public.h"
+#include "gpspublic.h"
 
 namespace Ui {
 class GSerialPort;

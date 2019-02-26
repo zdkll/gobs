@@ -3,6 +3,7 @@ TEMPLATE = subdirs
 SUBDIRS +=    \
     QtFtp \
     Core \
+    Algorithm \
     CommModule   \
     GPublicSo   \
     SqlFunctions \
@@ -11,6 +12,7 @@ SUBDIRS +=    \
     RNM  \
     DMC  \
     MainInterface \
+
 
 
 

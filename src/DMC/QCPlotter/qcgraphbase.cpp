@@ -1,8 +1,8 @@
-#include "qcgraphbase.h"
+﻿#include "qcgraphbase.h"
 
 #include <QPainter>
 #include <QMouseEvent>
-#include "gtoolsalgo.h"
+#include "toolsalgo.h"
 
 QCGraphBase::QCGraphBase(QWidget *parent)
     : QWidget(parent),m_gatherInfo(0)
