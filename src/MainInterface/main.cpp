@@ -26,12 +26,12 @@ int main(int argc, char *argv[])
 
 //    int ret;
 //    if(dlg.exec()){
-//        MainWindow w;
-//        w.show();
+        MainWindow w;
+        w.show();
 //      int  ret = a.exec();
 
-    GPositionSystem w;
-    w.show();
+//    GPositionSystem w;
+//    w.show();
 
 //    }
 

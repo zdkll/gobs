@@ -40,5 +40,9 @@ FORMS    += mainwindow.ui \
     logindlg.ui
 
 
-
+win32{
+target.files  = $$GOBS_THIRDPARTY/lib/*.dll
+target.path = $$GOBS_BIN
+INSTALLS += target
+}
 

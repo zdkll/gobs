@@ -11,16 +11,23 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-DEFINES += ALGORITHM_LIBRARY
+LIBS += -L$$GOBS_THIRDPARTY/lib -llibblas -lliblapack -lliblapacke
+
+DEFINES += ALGORITHM_LIBRARY ADD_   HAVE_LAPACK_CONFIG_H  LAPACK_COMPLEX_STRUCTURE
+
+INCLUDEPATH += $$GOBS_THIRDPARTY/include
+
 
 SOURCES += algorithm.cpp \
     geo2xy_utm.cpp \
-    gobs_interpolation.cpp
+    gobs_interpolation.cpp \
+    gobs_location.cpp
 
 HEADERS += algorithm.h\
         algorithm_global.h \
         geo2xy_utm.h \
-        ToolsAlgo.h
+        ToolsAlgo.h \
+    gobs_location.h
 
 unix {
     target.path = /usr/lib
