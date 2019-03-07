@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "gserialport.h"
+#include "datamanager.h"
 
 GPositionSystem::GPositionSystem(QWidget *parent) :
     QWidget(parent),
@@ -47,6 +48,8 @@ void GPositionSystem::slotRecvGpsCord(const GpsCoord& cord)
     }
     qDebug()<<"recv gps cord:"<<cord.utc_sec<<cord.x<<cord.y;
 
+    //坐标传递给数据中心
+    DataManager::instance()->addGpsCoord(cord);
 }
 
 void GPositionSystem::createWg()

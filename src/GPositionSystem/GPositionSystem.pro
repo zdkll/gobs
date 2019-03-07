@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,9 +13,10 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm
+LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman
 
-INCLUDEPATH += $$GOBS_SRC/Algorithm
+INCLUDEPATH += $$GOBS_SRC/Algorithm \
+                                 $$GOBS_SRC/Kalman
 
 
 # The following define makes your compiler emit warnings if you use
@@ -33,12 +34,17 @@ DEFINES += QT_DEPRECATED_WARNINGS GPOSTIONSYTEM_LIBRARY
 SOURCES += main.cpp\
         gpositionsystem.cpp \
     gserialport.cpp \
-    gpspublic.cpp
+    gpspublic.cpp \
+    datamanager.cpp \
+    boardconn.cpp
 
 HEADERS  += gpositionsystem.h \
     gserialport.h \
     gpositionsystem_global.h \
-    gpspublic.h
+    gpspublic.h \
+    datamanager.h \
+    boardconn.h
 
 FORMS    += gpositionsystem.ui \
-    gserialport.ui
+    gserialport.ui \
+    boardconn.ui

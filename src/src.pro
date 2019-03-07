@@ -4,7 +4,7 @@ SUBDIRS +=    \
     QtFtp \
     Core \
     Algorithm \
-    Kalman2019 \
+    Kalman \
     CommModule   \
     GPublicSo   \
     SqlFunctions \
