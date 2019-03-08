@@ -8,6 +8,7 @@
 
 #include "gserialport.h"
 #include "datamanager.h"
+#include "deckunit.h"
 
 GPositionSystem::GPositionSystem(QWidget *parent) :
     QWidget(parent),
@@ -62,16 +63,20 @@ void GPositionSystem::createWg()
     m_gSerialPort = new  GSerialPort(this);
     leftLayout->addWidget(m_gSerialPort);
 
-    //button
+    //start stop  button
     m_startBtn = new QPushButton(QStringLiteral("开始GPS定位"),this);
     m_stopBtn = new QPushButton(QStringLiteral("停止"),this);
     QHBoxLayout *btnLayout = new QHBoxLayout;
     btnLayout->addWidget(m_startBtn);
     btnLayout->addWidget(m_stopBtn);
     leftLayout->addLayout(btnLayout);
-    leftLayout->addStretch(1);
 
-    mainLayout->addLayout(leftLayout);
+    //Deck Unit
+    m_deckUnit = new DeckUnit(this);
+    leftLayout->addWidget(m_deckUnit);
+
+    leftLayout->addStretch(1);
+    mainLayout->addLayout(leftLayout,0);
 
     //右侧绘图区域
     mainLayout->addWidget(new QWidget(this),1);

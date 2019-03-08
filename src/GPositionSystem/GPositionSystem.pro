@@ -13,7 +13,7 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman
+LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman -lGPublicSo
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \
                                  $$GOBS_SRC/Kalman
@@ -36,15 +36,15 @@ SOURCES += main.cpp\
     gserialport.cpp \
     gpspublic.cpp \
     datamanager.cpp \
-    boardconn.cpp
+    deckunit.cpp
 
 HEADERS  += gpositionsystem.h \
     gserialport.h \
     gpositionsystem_global.h \
     gpspublic.h \
     datamanager.h \
-    boardconn.h
+    deckunit.h
 
 FORMS    += gpositionsystem.ui \
     gserialport.ui \
-    boardconn.ui
+    deckunit.ui

@@ -12,6 +12,7 @@ class GPositionSystem;
 
 class GSerialPort;
 class QPushButton;
+class DeckUnit;
 
 class  GPOSTIONSYTEMSHARED_EXPORT GPositionSystem : public QWidget
 {
@@ -33,6 +34,8 @@ private:
 
     Ui::GPositionSystem *ui;
     GSerialPort  *m_gSerialPort;
+
+    DeckUnit      *m_deckUnit;
 
 private:
     QPushButton *m_startBtn,*m_stopBtn;
