@@ -13,7 +13,7 @@ class GPositionSystem;
 class GSerialPort;
 class QPushButton;
 class DeckUnit;
-
+class QTextBrowser;
 class  GPOSTIONSYTEMSHARED_EXPORT GPositionSystem : public QWidget
 {
     Q_OBJECT
@@ -22,6 +22,7 @@ public:
     explicit GPositionSystem(QWidget *parent = 0);
     ~GPositionSystem();
 
+    void showText(const QString& text);
 protected slots:
     void startPostion();
     void stopPostion();
@@ -38,8 +39,9 @@ private:
     DeckUnit      *m_deckUnit;
 
 private:
-    QPushButton *m_startBtn,*m_stopBtn;
-
+    QPushButton  *m_startBtn,*m_stopBtn;
+    QTextBrowser *m_textBrowser;
+    ShowTextFunc m_showTxtFunc;
 };
 
 #endif // GPOSITIONSYSTEM_H

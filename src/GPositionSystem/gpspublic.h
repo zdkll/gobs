@@ -2,6 +2,7 @@
 #define GPSPUBLIC_H
 
 #include <QtGlobal>
+#include <functional>
 
 //GPS 坐标
 struct   GpsCoord
@@ -13,5 +14,9 @@ struct   GpsCoord
     double x;
     double y;
 };
+
+
+typedef std::function<void (const QString &)> ShowTextFunc;
+
 
 #endif // GPSPUBLIC_H

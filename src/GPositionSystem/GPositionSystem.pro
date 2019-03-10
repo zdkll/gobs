@@ -16,7 +16,8 @@ include(../../gobs.pri)
 LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman -lGPublicSo
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \
-                                 $$GOBS_SRC/Kalman
+                                 $$GOBS_SRC/Kalman \
+                                 $$GOBS_SRC/GPublicSo
 
 
 # The following define makes your compiler emit warnings if you use

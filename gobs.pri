@@ -4,6 +4,7 @@ GOBS_DIR = $$PWD
 GOBS_LIB   = $$GOBS_DIR/lib
 GOBS_BIN  = $$GOBS_DIR/bin
 GOBS_SRC = $$GOBS_DIR/src
+GOBS_THIRDPARTY = $$GOBS_DIR/thirdparty
 
 INCLUDEPATH += $$GOBS_DIR/include \
                            $$GOBS_SRC/Core  \
