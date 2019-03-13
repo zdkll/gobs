@@ -9,6 +9,7 @@
 #include "gserialport.h"
 #include "datamanager.h"
 #include "deckunit.h"
+#include "positionchart.h"
 
 GPositionSystem::GPositionSystem(QWidget *parent) :
     QWidget(parent),
@@ -79,7 +80,8 @@ void GPositionSystem::createWg()
     mainLayout->addLayout(leftLayout,0);
 
     //右侧绘图区域
-    mainLayout->addWidget(new QWidget(this),1);
+    m_positionChart = new PositionChart(this);
+    mainLayout->addWidget(m_positionChart,1);
 
     this->setLayout(mainLayout);
 

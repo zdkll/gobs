@@ -8,11 +8,13 @@ SUBDIRS +=    \
     CommModule   \
     GPublicSo   \
     SqlFunctions \
+    Chart \
     GPositionSystem \
     LMGR \
     RNM  \
     DMC  \
     MainInterface \
+
 
 
 

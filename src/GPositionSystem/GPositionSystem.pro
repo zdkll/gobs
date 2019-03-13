@@ -13,11 +13,11 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman -lGPublicSo
+LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman -lGPublicSo -lChart
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \
-                                 $$GOBS_SRC/Kalman
-
+                                 $$GOBS_SRC/Kalman  \
+                                $$GOBS_SRC/Chart \
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -36,14 +36,16 @@ SOURCES += main.cpp\
     gserialport.cpp \
     gpspublic.cpp \
     datamanager.cpp \
-    deckunit.cpp
+    deckunit.cpp \
+    positionchart.cpp
 
 HEADERS  += gpositionsystem.h \
     gserialport.h \
     gpositionsystem_global.h \
     gpspublic.h \
     datamanager.h \
-    deckunit.h
+    deckunit.h \
+    positionchart.h
 
 FORMS    += gpositionsystem.ui \
     gserialport.ui \

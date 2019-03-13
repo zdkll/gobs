@@ -5,7 +5,6 @@
 #include "gpositionsystem_global.h"
 #include "gpspublic.h"
 
-
 namespace Ui {
 class GPositionSystem;
 }
@@ -13,7 +12,7 @@ class GPositionSystem;
 class GSerialPort;
 class QPushButton;
 class DeckUnit;
-
+class PositionChart;
 class  GPOSTIONSYTEMSHARED_EXPORT GPositionSystem : public QWidget
 {
     Q_OBJECT
@@ -33,13 +32,13 @@ private:
     void createWg();
 
     Ui::GPositionSystem *ui;
-    GSerialPort  *m_gSerialPort;
+    GSerialPort   *m_gSerialPort;
 
-    DeckUnit      *m_deckUnit;
+    DeckUnit        *m_deckUnit;
+    PositionChart *m_positionChart;
 
-private:
+    //=============================
     QPushButton *m_startBtn,*m_stopBtn;
-
 };
 
 #endif // GPOSITIONSYSTEM_H

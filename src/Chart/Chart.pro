@@ -9,12 +9,22 @@ QT       += widgets
 TARGET = Chart
 TEMPLATE = lib
 
+include (../../gobs.pri)
+
 DEFINES += CHART_LIBRARY
 
-SOURCES += chart.cpp
+SOURCES += chart.cpp \
+    chartdrawer.cpp \
+    abstractaxis.cpp \
+    graphlayer.cpp \
+    drawable.cpp
 
 HEADERS += chart.h\
-        chart_global.h
+        chart_global.h \
+    chartdrawer.h \
+    abstractaxis.h \
+    graphlayer.h \
+    drawable.h
 
 unix {
     target.path = /usr/lib

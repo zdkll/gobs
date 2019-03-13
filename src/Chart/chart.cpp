@@ -1,6 +1,8 @@
-#include "chart.h"
+﻿#include "chart.h"
 
 
-Chart::Chart()
+Chart::Chart(QWidget *parent)
+    :QWidget(parent),m_drawer(new ChartDrawer(this))
 {
+
 }

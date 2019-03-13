@@ -1,11 +1,15 @@
-#ifndef ABSTRACTAXIS_H
+﻿#ifndef ABSTRACTAXIS_H
 #define ABSTRACTAXIS_H
 
+#include <QObject>
 
-class AbstractAxis
+#include "graphlayer.h"
+
+class AbstractAxis : public GraphLayer
 {
 public:
-    AbstractAxis();
+    AbstractAxis(QObject *parent = 0);
+
 };
 
 #endif // ABSTRACTAXIS_H

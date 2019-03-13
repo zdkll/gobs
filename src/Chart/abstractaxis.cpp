@@ -1,6 +1,7 @@
-#include "abstractaxis.h"
+﻿#include "abstractaxis.h"
 
-AbstractAxis::AbstractAxis()
+AbstractAxis::AbstractAxis(QObject *parent)
+    :GraphLayer(parent)
 {
 
 }

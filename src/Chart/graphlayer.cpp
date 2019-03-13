@@ -1,6 +1,7 @@
-#include "graphlayer.h"
+﻿#include "graphlayer.h"
 
-GraphLayer::GraphLayer()
+GraphLayer::GraphLayer(QObject *parent)
+    :BaseLayer(parent)
 {
 
 }
