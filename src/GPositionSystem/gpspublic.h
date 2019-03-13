@@ -5,14 +5,23 @@
 #include <functional>
 
 //GPS 坐标
-struct   GpsCoord
+struct Coord
+{
+    double x;
+    double y;
+};
+
+struct   GpsCoord : public Coord
 {
     GpsCoord();
     GpsCoord toXy();
 
     quint32  utc_sec = 0; //utc毫秒
-    double x;
-    double y;
+};
+
+struct GobsCoord : public Coord
+{
+    double z;//gobs 增加z坐标分量
 };
 
 

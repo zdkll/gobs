@@ -4,8 +4,7 @@
 #include <QPixmap>
 
 Drawable::Drawable()
-    :m_pix(new QPixmap())
-    ,m_paintState(PS_NoPaint)
+    :m_paintState(PS_NoPaint)
 {
 
 }
@@ -21,15 +20,12 @@ void Drawable::resize(const QRect &rect)
     m_paintState =  PS_Resize;
 }
 
-void Drawable::paint()
+void Drawable::paint(QPainter *pt)
 {
     if(m_paintState ==  PS_DataChanged)
         calData();
-    else if(m_paintState ==  PS_Resize)
-        *m_pix = QPixmap(m_rect.size());
-
     if(m_paintState != PS_NoPaint){
-        rePaint(); //绘制
+        rePaint(pt); //绘制
         m_paintState = PS_NoPaint;
     }
 }

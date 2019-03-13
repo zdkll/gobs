@@ -11,7 +11,7 @@ class BaseLayer : public QObject,public Drawable
 public:
     BaseLayer(QObject *parent = 0):QObject(parent){}
 
-protected:
+
     virtual bool msPress(QMouseEvent *e){return false;}
     virtual bool msMove(QMouseEvent *e){return false;}
     virtual bool msRelease(QMouseEvent *e){return false;}

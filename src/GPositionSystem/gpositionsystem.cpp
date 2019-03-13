@@ -12,6 +12,7 @@
 #include "datamanager.h"
 #include "deckunit.h"
 #include "positionchart.h"
+#include "postioncontrols.h"
 
 GPositionSystem::GPositionSystem(QWidget *parent) :
     QWidget(parent),
@@ -67,7 +68,7 @@ void GPositionSystem::slotRecvGpsCord(const GpsCoord& cord)
 void GPositionSystem::createWg()
 {
     QHBoxLayout *mainLayout = new QHBoxLayout;
-
+    mainLayout->setSpacing(0);
     //左侧边栏--------------------------------
     QWidget  *leftWidget = new QWidget;
     QVBoxLayout *leftLayout = new QVBoxLayout;
@@ -87,7 +88,6 @@ void GPositionSystem::createWg()
     m_deckUnit = new DeckUnit(this);
     leftLayout->addWidget(m_deckUnit);
 
-    leftLayout->addStretch(1);
     leftWidget->setLayout(leftLayout);
 
     leftWidget->setMaximumWidth(280);
@@ -97,9 +97,15 @@ void GPositionSystem::createWg()
 
     mainLayout->addWidget(leftWidget,0);
 
-    //右侧绘图区域
+    //右侧绘图布局
+    QVBoxLayout *rightLayout = new QVBoxLayout;
+    TitleBar *titleBar = new TitleBar(this);
+    rightLayout->addWidget(titleBar);
+
     m_positionChart = new PositionChart(this);
-    mainLayout->addWidget(m_positionChart,1);
+    rightLayout->addWidget(m_positionChart,1);
+
+    mainLayout->addLayout(rightLayout,1);
 
     this->setLayout(mainLayout);
 
@@ -108,4 +114,6 @@ void GPositionSystem::createWg()
 
     connect(m_startBtn,&QPushButton::clicked,this,&GPositionSystem::startPostion);
     connect(m_stopBtn,&QPushButton::clicked,this,&GPositionSystem::stopPostion);
+
+    connect(titleBar,&TitleBar::sideBarHide,leftWidget,&QWidget::setHidden);
 }

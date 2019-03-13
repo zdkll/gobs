@@ -6,6 +6,7 @@
 
 #include "graphlayer.h"
 
+//图层管理类
 class ChartDrawer : public BaseLayer
 {
 public:
@@ -15,7 +16,7 @@ protected:
     bool eventFilter(QObject *watched, QEvent *event);//过滤处理窗口事件
 
     bool wgResize(const QSize& size);//大小变化
-    void paint();
+    void paintOnWidget();
 
     bool msPress(QMouseEvent *e);
     bool msMove(QMouseEvent *e);
@@ -24,7 +25,7 @@ protected:
 
 private:
     QWidget *m_wget;    //绘制窗口
-
+    QPixmap *m_pix;
     QVector<GraphLayer* > m_graphLayers;//管理图层
 };
 
