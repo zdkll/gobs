@@ -4,6 +4,8 @@
 #include <QBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QTextBrowser>
+
 #include <QDebug>
 
 #include "gserialport.h"
@@ -16,6 +18,7 @@ GPositionSystem::GPositionSystem(QWidget *parent) :
     ui(new Ui::GPositionSystem)
 {
     ui->setupUi(this);
+    m_showTxtFunc = std::bind(&GPositionSystem::showText,this,std::placeholders::_1);
 
     createWg();
 
@@ -27,6 +30,13 @@ GPositionSystem::~GPositionSystem()
     delete ui;
 }
 
+void GPositionSystem::showText(const QString &text)
+{
+    if(m_textBrowser->isBackwardAvailable()){
+        m_textBrowser->clear();
+    }
+    m_textBrowser->append(text);
+}
 
 void GPositionSystem::startPostion()
 {
@@ -59,6 +69,7 @@ void GPositionSystem::createWg()
     QHBoxLayout *mainLayout = new QHBoxLayout;
 
     //左侧边栏--------------------------------
+    QWidget  *leftWidget = new QWidget;
     QVBoxLayout *leftLayout = new QVBoxLayout;
     //serialPort
     m_gSerialPort = new  GSerialPort(this);
@@ -77,13 +88,23 @@ void GPositionSystem::createWg()
     leftLayout->addWidget(m_deckUnit);
 
     leftLayout->addStretch(1);
-    mainLayout->addLayout(leftLayout,0);
+    leftWidget->setLayout(leftLayout);
+
+    leftWidget->setMaximumWidth(280);
+
+    m_textBrowser = new QTextBrowser(this);
+    leftLayout->addWidget(m_textBrowser);
+
+    mainLayout->addWidget(leftWidget,0);
 
     //右侧绘图区域
     m_positionChart = new PositionChart(this);
     mainLayout->addWidget(m_positionChart,1);
 
     this->setLayout(mainLayout);
+
+    m_gSerialPort->setShowTxtFunc(m_showTxtFunc);
+    m_deckUnit->setShowTxtFunc(m_showTxtFunc);
 
     connect(m_startBtn,&QPushButton::clicked,this,&GPositionSystem::startPostion);
     connect(m_stopBtn,&QPushButton::clicked,this,&GPositionSystem::stopPostion);

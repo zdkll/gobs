@@ -17,23 +17,24 @@ int main(int argc, char *argv[])
         QMessageBox::warning(NULL,"Error","Create Documents File Error.");
         exit(1);
     }
-//    QString icon = QApplication::applicationDirPath()
-//            + "/../icon/gobs.png";
-//    a.setWindowIcon(QIcon(icon));
+    //    QString icon = QApplication::applicationDirPath()
+    //            + "/../icon/gobs.png";
+    //    a.setWindowIcon(QIcon(icon));
 
     //登陆界对话框
-//    LoginDlg dlg;
+    //    LoginDlg dlg;
 
-//    int ret;
-//    if(dlg.exec()){
-//        MainWindow w;
-//        w.show();
-//      int  ret = a.exec();
+    //    int ret;
+    //    if(dlg.exec()){
+    //        MainWindow w;
+    //        w.show();
+    //      int  ret = a.exec();
 
     GPositionSystem w;
+
     w.show();
 
-//    }
+    //    }
 
     return a.exec();
 }

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QTcpSocket>
 
+#include "gpspublic.h"
+
 namespace Ui {
 class DeckUnit;
 }
@@ -15,19 +17,31 @@ class QCheckBox;
 //负责与甲板机通信数据
 class DeckUnit : public QWidget
 {
+    Q_OBJECT
 public:
     DeckUnit(QWidget *parent = Q_NULLPTR);
+    void setShowTxtFunc(ShowTextFunc func);
+
+protected slots:
+    void slotConnect(bool connect);
+    void startTx();
+    void stopTx();
+
+    void socketStateChanged(QAbstractSocket::SocketState state);
+    void slotReadyRead();
 
 private:
     void createWg();
 
 private:
-    Ui::DeckUnit  *ui;
-    QTcpSocket   *m_socket;
+    Ui::DeckUnit   *ui;
+    QTcpSocket    *m_socket;
+    ShowTextFunc m_showTxtFunc;
 
     //控件
     IpAddrEdit *m_ipAddrEdit;
     QLineEdit  *m_portEdit;
+    QWidget    *m_optWidget;
 };
 
 #endif // DECKUNIT_H

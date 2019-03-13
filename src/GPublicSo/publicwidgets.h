@@ -174,4 +174,5 @@ private:
     QLabel  *m_label;
 };
 
+
 #endif // PUBLICWIDGETS_H

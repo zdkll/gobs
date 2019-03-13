@@ -63,6 +63,10 @@ void GSerialPort::close()
     m_serialPort->flush();
     m_serialPort->close();
 }
+void GSerialPort::setShowTxtFunc(ShowTextFunc func)
+{
+    m_showTxtFunc = func;
+}
 
 void GSerialPort::slotReadyRead()
 {
