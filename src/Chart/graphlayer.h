@@ -6,6 +6,8 @@
 #include "drawable.h"
 #include "chart_global.h"
 
+
+
 class QMouseEvent;
 class BaseLayer : public QObject,public Drawable
 {
@@ -18,6 +20,15 @@ public:
     virtual bool msDblClick(QMouseEvent *){return false;}
 };
 
+class GraphLayer;
+
+struct LayerInfo
+{
+    LayerInfo(GraphLayer* mlayer):mLayer(mlayer){}
+
+    GraphLayer  *mLayer;//主图层
+    QRect           graphRect;
+};
 
 //图层，最基础的绘图元素,内建数据管理模型
 class  CHARTSHARED_EXPORT GraphLayer : public BaseLayer
@@ -25,6 +36,11 @@ class  CHARTSHARED_EXPORT GraphLayer : public BaseLayer
 public:
     GraphLayer(QObject *parent = 0);
 
+    void setLayerInfo(LayerInfo *layerInfo){m_layerInfo = layerInfo;}
+    virtual void draw();
+
+private:
+    LayerInfo *m_layerInfo;
 };
 
 #endif // GRAPHLAYER_H

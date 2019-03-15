@@ -4,9 +4,10 @@
 #include <QObject>
 #include <QRect>
 #include <QPixmap>
+#include "chart_global.h"
 
 class QPainter;
-class Drawable
+class CHARTSHARED_EXPORT  Drawable
 {
 public:
     enum ePaintState //绘制状态
@@ -16,15 +17,22 @@ public:
         PS_Resize   = 2
     };
     Drawable();
+    virtual ~Drawable(){}
 
     void dataChanged(); //数据改变
 
     void setGeometry(const QRect& rect);//绘图区域改变
     inline QRect geometry()const {return m_rect;}
 
+    inline void setBackgroundColor(const QColor& color){m_backgroundColor = color;}
+    inline QColor backgroundColor()const{return m_backgroundColor;}
+
     void paint(QPainter *pt);//绘制函数
 
     ePaintState paintState() const{return m_paintState;}
+
+    //获取pixmap
+    QPixmap pixmap()const {return m_pix;}
 
 protected:
     virtual void calData(){}//计算数据
@@ -32,7 +40,9 @@ protected:
 
 private:
     QRect          m_rect;
-    ePaintState m_paintState;
+    ePaintState  m_paintState;
+    QPixmap     m_pix;
+    QColor        m_backgroundColor;
 };
 
 #endif // DRAWABLE_H

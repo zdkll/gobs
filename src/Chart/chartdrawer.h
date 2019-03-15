@@ -12,6 +12,8 @@
 typedef QMargins AxisSpaces;
 
 class Chart;
+class GraphLayer;
+class AbstractAxis;
 //主图层，图层管理类,管理所有自图层,负责绘制主图形区域
 class CHARTSHARED_EXPORT ChartDrawer : public GraphLayer
 {
@@ -33,7 +35,9 @@ public:
     void   setAixsSpaces(const AxisSpaces& spaces);
     inline AxisSpaces axisSpaces()const {return m_axisSpaces;}
 
-    inline QRect graphRect()const {return m_graphRect;}
+    inline QRect graphRect()const {return m_layerInfo->graphRect;}
+
+    inline void draw(){m_wget->update();}
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);//过滤处理窗口事件
@@ -55,17 +59,15 @@ private:
     //更新所有子图层的绘图区域
     void updateGeometry();
 
-    QWidget       *m_wget;    //绘制窗口
-    QPixmap      *m_pix;
+    QWidget     *m_wget;    //绘制窗口
+    LayerInfo    *m_layerInfo; //图层信息
+
     QMargins      m_contentMargins;
     AxisSpaces   m_axisSpaces;//坐标轴区域，可变的，坐标轴实际占位置为空
 
-    QRect          m_graphRect;//图像区域
-    QColor         m_backgroundColor;//背景色
-
     QMap<AbstractAxis *,Qt::Alignment>  m_axisAlignMp; //坐标轴-方位
     QMap<Qt::Alignment,AbstractAxis *>  m_alignAxisMp;//方位-坐标轴
-    QVector<GraphLayer* > m_graphLayers;//所有图层
+    QVector<GraphLayer* > m_allLayers;//所有图层
 
     friend class Chart;
 };

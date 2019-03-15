@@ -7,11 +7,9 @@
 
 ChartDrawer::ChartDrawer(QObject *parent)
     :GraphLayer(parent ),m_wget(0)
-    ,m_pix(new QPixmap())
-    ,m_backgroundColor(Qt::white)
+    ,m_layerInfo(new LayerInfo(this))
 {
-    //将自身放入绘制容器
-    m_graphLayers.append(this);
+
 }
 
 void ChartDrawer::addAxis(Qt::Alignment alignment, AbstractAxis *axis)
@@ -27,6 +25,11 @@ void ChartDrawer::addAxis(Qt::Alignment alignment, AbstractAxis *axis)
     axis->setAlignment(alignment);
     m_alignAxisMp.insert(alignment,axis);
     m_axisAlignMp.insert(axis,alignment);
+
+    m_allLayers.append(axis);
+
+    axis->setLayerInfo(m_layerInfo);
+
     axis->setParent(this);
 }
 
@@ -41,9 +44,12 @@ AbstractAxis *ChartDrawer::axis(Qt::Alignment alignment) const
 
 void ChartDrawer::addGraphLayer(GraphLayer *graphLayer)
 {
-    m_graphLayers.append(graphLayer);
+    m_allLayers.append(graphLayer);
 
     graphLayer->setGeometry(customLayerGeometry(graphLayer));
+
+    //设置公共图层信息
+    graphLayer->setLayerInfo(m_layerInfo);
 }
 
 void ChartDrawer::setContentMargins(const QMargins &margin)
@@ -99,7 +105,7 @@ bool ChartDrawer::eventFilter(QObject *watched, QEvent *event)
 
 bool ChartDrawer::wgResize(const QSize &size)
 {
-    BaseLayer::setGeometry(QRect(QPoint(0,0),size));
+    GraphLayer::setGeometry(QRect(QPoint(0,0),size));
 
     //更新每个子图层的geometry
     updateGeometry();
@@ -109,25 +115,18 @@ bool ChartDrawer::wgResize(const QSize &size)
 
 void ChartDrawer::paintOnWidget()
 {
-    if(paintState() == PS_Resize){
-        *m_pix = QPixmap(this->geometry().size());
-    }
-    //重新绘制总的画布
-    if(paintState() != PS_NoPaint){
-        m_pix->fill(m_backgroundColor);//填充背景色
-        QPainter pt(m_pix);
-        foreach (GraphLayer *layer, m_graphLayers)
-            layer->paint(&pt);
-    }
     //绘制图形
     QPainter painter(m_wget);
-    painter.drawPixmap(0,0,*m_pix);
+    //重新绘制总的画布
+    this->paint(&painter);
+    foreach (GraphLayer *layer, m_allLayers)
+        layer->paint(&painter);
     painter.end();
 }
 
 bool ChartDrawer::msPress(QMouseEvent *e)
 {
-    foreach (GraphLayer *layer, m_graphLayers) {
+    foreach (GraphLayer *layer, m_allLayers) {
         if(layer->msPress(e))
             return true;
     }
@@ -136,7 +135,7 @@ bool ChartDrawer::msPress(QMouseEvent *e)
 
 bool ChartDrawer::msMove(QMouseEvent *e)
 {
-    foreach (GraphLayer *layer, m_graphLayers) {
+    foreach (GraphLayer *layer, m_allLayers) {
         if(layer->msMove(e))
             return true;
     }
@@ -145,7 +144,7 @@ bool ChartDrawer::msMove(QMouseEvent *e)
 
 bool ChartDrawer::msRelease(QMouseEvent *e)
 {
-    foreach (GraphLayer *layer, m_graphLayers) {
+    foreach (GraphLayer *layer, m_allLayers) {
         if(layer->msRelease(e))
             return true;
     }
@@ -154,7 +153,7 @@ bool ChartDrawer::msRelease(QMouseEvent *e)
 
 bool ChartDrawer::msDblClick(QMouseEvent *e)
 {
-    foreach (GraphLayer *layer, m_graphLayers) {
+    foreach (GraphLayer *layer, m_allLayers) {
         if(layer->msDblClick(e))
             return true;
     }
@@ -170,9 +169,8 @@ void ChartDrawer::setWidget(QWidget *wg)
 
 void ChartDrawer::updateGeometry()
 {
-    QVector<GraphLayer* > graphLayers = m_graphLayers;
+    QVector<GraphLayer* > graphLayers = m_allLayers;
     QRect rect =this->geometry().adjusted(m_contentMargins.left(),m_contentMargins.top(),-m_contentMargins.right(),-m_contentMargins.bottom());
-    QRect graphRect  =rect;
 
     //先统计坐标轴
     auto it = m_alignAxisMp.begin();
@@ -183,29 +181,25 @@ void ChartDrawer::updateGeometry()
         //左侧坐标轴
         case Qt::AlignLeft:
         {
-            graphRect.setLeft(graphRect.left()+m_axisSpaces.left());
             it.value()->setGeometry(QRect(rect.left(),rect.top(),m_axisSpaces.left(),rect.height()));
         }
             break;
             //顶部坐标轴
         case Qt::AlignTop:
         {
-            graphRect.setTop(graphRect.top()+m_axisSpaces.top());
             it.value()->setGeometry(QRect(rect.left(),rect.top(),rect.width(),m_axisSpaces.top()));
         }
             break;
             //右侧坐标轴
         case Qt::AlignRight:
         {
-            graphRect.setWidth(graphRect.width()-m_axisSpaces.right());
             it.value()->setGeometry(QRect(rect.right()-m_axisSpaces.right(),rect.top(),m_axisSpaces.right(),rect.height()));
         }
             break;
             //底部坐标轴
         case Qt::AlignBottom:
         {
-            graphRect.setHeight(graphRect.height()-m_axisSpaces.bottom());
-            it.value()->setGeometry(QRect(rect.left(),rect.bottom()-m_axisSpaces.bottom(),rect.right(),m_axisSpaces.bottom()));
+            it.value()->setGeometry(QRect(rect.left(),rect.bottom()-m_axisSpaces.bottom(),rect.width(),m_axisSpaces.bottom()));
         }
             break;
         default:
@@ -214,12 +208,10 @@ void ChartDrawer::updateGeometry()
         it++;
     }
 
-    m_graphRect = graphRect;
+    m_layerInfo->graphRect = rect.adjusted(m_axisSpaces.left(),m_axisSpaces.top(),-m_axisSpaces.right(),-m_axisSpaces.bottom());
+
     foreach(GraphLayer *layer,graphLayers){
-        if(layer == this)
-            continue ;
-        else
-            return  layer->setGeometry(customLayerGeometry(layer));//普通图层
+        return  layer->setGeometry(customLayerGeometry(layer));//普通图层
     }
 }
 

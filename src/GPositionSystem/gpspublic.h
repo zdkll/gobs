@@ -24,6 +24,17 @@ struct GobsCoord : public Coord
     double z;//gobs 增加z坐标分量
 };
 
+//数据范围
+struct DataScope
+{
+    float minX;
+    float maxX;
+    float minY;
+    float maxY;
+    float minZ = 0;
+    float maxZ = 0;
+};
+
 
 typedef std::function<void (const QString &)> ShowTextFunc;
 

@@ -23,6 +23,8 @@ GPositionSystem::GPositionSystem(QWidget *parent) :
 
     createWg();
 
+    this->resize(1000,520);
+
     connect(m_gSerialPort,&GSerialPort::recvGpsCord,this,&GPositionSystem::slotRecvGpsCord);
 }
 
