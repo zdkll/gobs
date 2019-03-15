@@ -1,9 +1,12 @@
 ﻿#ifndef POSITIONCHART_H
 #define POSITIONCHART_H
 
-#include  "chart.h"
 #include "gpspublic.h"
+#include  "chart.h"
+#include  "chartdrawer.h"
 
+class  PositionChartDrawer;
+class  ValueAxis;
 //定位系统图像控件
 class PositionChart : public Chart
 {
@@ -19,8 +22,26 @@ public:
     void setGpsPoint(int idx,const GpsCoord& cord);
     void setGobsPoint(int idx,const GobsCoord &cord);
 
+protected:
+    virtual void calData();//计算数据
+    virtual void rePaint(QPainter* pt);//重新绘制(数据或者绘图范围改变都要重新绘制)
+
 private:
+    //数据范围
+    struct DataScope
+    {
+        float minX;
+        float maxX;
+        float minY;
+        float maxY;
+        float minZ;
+        float maxZ;
+    }m_dataScope;
+
     void initChart();//初始化图层
+
+    PositionChartDrawer *m_posChartDrawer;
+    ValueAxis                  *m_axisX,*m_axisY;
 
     QVector<GpsCoord>   m_gpsCords;
     QVector<GobsCoord> m_gobsCords;
@@ -28,9 +49,31 @@ private:
 
 
 
-//以下为自定义图层，继承自GraphLayer 图层
+//以下为自定义图层，继承自GraphLayer 图层---
+//主图层区域
+class PositionChartDrawer : public ChartDrawer
+{
+public:
+    PositionChartDrawer(QObject *parent = 0);
 
+};
 
+//X坐标轴-Y坐标轴-连续值-统一处理
+class ValueAxis  : public AbstractAxis
+{
+public:
+    ValueAxis(QObject *parent = 0);
+
+    inline void setMin(float minVal){m_minVal = minVal;}
+    inline float min() const{return m_minVal;}
+
+    inline void setMax(float maxVal){m_maxVal = maxVal;}
+    inline float max() const{return m_maxVal;}
+
+private:
+    float m_minVal= 0;
+    float m_maxVal = 0;
+};
 
 
 #endif // POSITIONCHART_H

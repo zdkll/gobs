@@ -3,30 +3,71 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QMap>
 
 #include "graphlayer.h"
+#include "abstractaxis.h"
+#include "chart_global.h"
 
-//图层管理类
-class ChartDrawer : public BaseLayer
+typedef QMargins AxisSpaces;
+
+class Chart;
+//主图层，图层管理类,管理所有自图层,负责绘制主图形区域
+class CHARTSHARED_EXPORT ChartDrawer : public GraphLayer
 {
 public:
-    ChartDrawer(QWidget *wg,QObject *parent = 0);
+    ChartDrawer(QObject *parent = 0);
+
+    //刻度
+    void addAxis(Qt::Alignment alignment,AbstractAxis *axis);
+    AbstractAxis *axis(Qt::Alignment alignment) const;
+
+    //添加普通图层，绘制范围默认在图像区域
+    void addGraphLayer(GraphLayer* graphLayer);
+
+    //设置整个图像的margins
+    void   setContentMargins(const QMargins& margin);
+    inline QMargins contentMargins() const {return m_contentMargins;}
+
+    //设置坐标轴的空间
+    void   setAixsSpaces(const AxisSpaces& spaces);
+    inline AxisSpaces axisSpaces()const {return m_axisSpaces;}
+
+    inline QRect graphRect()const {return m_graphRect;}
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);//过滤处理窗口事件
 
-    bool wgResize(const QSize& size);//大小变化
-    void paintOnWidget();
+    virtual bool wgResize(const QSize& size);//依附的窗口大小变化
+    void paintOnWidget();//绘制窗口
 
-    bool msPress(QMouseEvent *e);
-    bool msMove(QMouseEvent *e);
-    bool msRelease(QMouseEvent *e);
-    bool msDblClick(QMouseEvent *e);
+    //窗口事件
+    virtual bool msPress(QMouseEvent *e);
+    virtual bool msMove(QMouseEvent *e);
+    virtual bool msRelease(QMouseEvent *e);
+    virtual bool msDblClick(QMouseEvent *e);
+
+    //返回图层绘图区域/自定义普通图层
+    virtual QRect customLayerGeometry(GraphLayer* layer);
 
 private:
-    QWidget *m_wget;    //绘制窗口
-    QPixmap *m_pix;
-    QVector<GraphLayer* > m_graphLayers;//管理图层
+    void setWidget(QWidget *wg);//设置所属的窗口
+    //更新所有子图层的绘图区域
+    void updateGeometry();
+
+    QWidget       *m_wget;    //绘制窗口
+    QPixmap      *m_pix;
+    QMargins      m_contentMargins;
+    AxisSpaces   m_axisSpaces;//坐标轴区域，可变的，坐标轴实际占位置为空
+
+    QRect          m_graphRect;//图像区域
+    QColor         m_backgroundColor;//背景色
+
+    QMap<AbstractAxis *,Qt::Alignment>  m_axisAlignMp; //坐标轴-方位
+    QMap<Qt::Alignment,AbstractAxis *>  m_alignAxisMp;//方位-坐标轴
+    QVector<GraphLayer* > m_graphLayers;//所有图层
+
+    friend class Chart;
 };
 
 #endif // CHARTDRAWER_H

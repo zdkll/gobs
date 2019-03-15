@@ -3,27 +3,20 @@
 
 #include "chart_global.h"
 
-#include <QObject>
+#include <QWidget>
 
-#include "chartdrawer.h"
-
-#include "abstractaxis.h"
-
-//自己设计的绘图模块，可以适用于各种图像绘制的框架
+class ChartDrawer;
+//自己设计的绘图窗口,使用ChartDrawer绘制在此窗口上
 class CHARTSHARED_EXPORT Chart : public QWidget
 {
     Q_OBJECT
 public:
-    enum AxesFlag
-    {
-        XTopAxes
-    };
     Chart(QWidget *parent = 0);
+    Chart( ChartDrawer *drawer,QWidget *parent = 0);
 
     //设置绘图控件
-    ChartDrawer *drawer(){return m_drawer;}
-
-private:
+    ChartDrawer *drawer()const {return m_drawer;}
+    void setCharDrawer(ChartDrawer  *drawer);
 
 private:
     ChartDrawer  *m_drawer;

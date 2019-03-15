@@ -14,7 +14,7 @@ void Drawable::dataChanged()
     m_paintState =  PS_DataChanged;
 }
 
-void Drawable::resize(const QRect &rect)
+void Drawable::setGeometry(const QRect &rect)
 {
     m_rect = rect;
     m_paintState =  PS_Resize;
