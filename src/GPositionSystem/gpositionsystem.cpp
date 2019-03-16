@@ -19,7 +19,7 @@ GPositionSystem::GPositionSystem(QWidget *parent) :
     ui(new Ui::GPositionSystem)
 {
     ui->setupUi(this);
-    m_showTxtFunc = std::bind(&GPositionSystem::showText,this,std::placeholders::_1);
+//    m_showTxtFunc = std::bind(&GPositionSystem::showText,this,std::placeholders::_1);
 
     createWg();
 
@@ -111,8 +111,8 @@ void GPositionSystem::createWg()
 
     this->setLayout(mainLayout);
 
-    m_gSerialPort->setShowTxtFunc(m_showTxtFunc);
-    m_deckUnit->setShowTxtFunc(m_showTxtFunc);
+//    m_gSerialPort->setShowTxtFunc(m_showTxtFunc);
+//    m_deckUnit->setShowTxtFunc(m_showTxtFunc);
 
     connect(m_startBtn,&QPushButton::clicked,this,&GPositionSystem::startPostion);
     connect(m_stopBtn,&QPushButton::clicked,this,&GPositionSystem::stopPostion);

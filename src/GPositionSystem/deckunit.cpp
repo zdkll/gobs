@@ -8,6 +8,7 @@
 #include <QGroupBox>
 #include <QIntValidator>
 #include <QCheckBox>
+#include <QComboBox>
 
 #include "publicwidgets.h"
 
@@ -24,20 +25,20 @@ DeckUnit::DeckUnit(QWidget *parent)
     connect(m_socket,&QTcpSocket::readyRead,this,&DeckUnit::slotReadyRead);
 }
 
-void DeckUnit::setShowTxtFunc(ShowTextFunc func)
-{
-    m_showTxtFunc = func;
-}
+//void DeckUnit::setShowTxtFunc(ShowTextFunc func)
+//{
+//    m_showTxtFunc = func;
+//}
 
 void DeckUnit::slotConnect(bool connect)
 {
     if(connect){
         if(m_ipAddrEdit->text().isEmpty()){
-            m_showTxtFunc(QStringLiteral("请输入正确的IP地址!"));
+            //            m_showTxtFunc(QStringLiteral("请输入正确的IP地址!"));
             return;
         }
         if(m_portEdit->text().isEmpty() || m_portEdit->text().trimmed().toInt()<1){
-            m_showTxtFunc(QStringLiteral("请输入正确的Port!"));
+            //            m_showTxtFunc(QStringLiteral("请输入正确的Port!"));
             return;
         }
         m_socket->connectToHost(m_ipAddrEdit->text(),m_portEdit->text().trimmed().toShort());
@@ -50,6 +51,9 @@ void DeckUnit::startTx()
     //发送命令
     char cmdTx[] = {0x3A,0x01,0x05};
     m_socket->write(cmdTx,3);
+
+    //EPC编号
+//  m_epcCbx
 }
 
 void DeckUnit::stopTx()
@@ -62,10 +66,10 @@ void DeckUnit::stopTx()
 void DeckUnit::socketStateChanged(QAbstractSocket::SocketState state)
 {
     if(state == QAbstractSocket::ConnectedState){
-        m_showTxtFunc(QStringLiteral("连接到甲板机!"));
+        //        m_showTxtFunc(QStringLiteral("连接到甲板机!"));
         m_optWidget->setEnabled(true);
 
-        m_showTxtFunc(QStringLiteral("设置甲板机参数..."));
+        //        m_showTxtFunc(QStringLiteral("设置甲板机参数..."));
         //链接上之后设置参数
         //Repeat Interval 30seconds
         char cmdInterval[] = {0x3A,0x02,0x01,0x1E};
@@ -76,7 +80,7 @@ void DeckUnit::socketStateChanged(QAbstractSocket::SocketState state)
         m_socket->write(cmdTimes,3);
     }else if(state == QAbstractSocket::UnconnectedState)
     {
-        m_showTxtFunc(QStringLiteral("甲板机断开链接!"));
+        //        m_showTxtFunc(QStringLiteral("甲板机断开链接!"));
         m_optWidget->setEnabled(false);
     }
 }
@@ -89,9 +93,9 @@ void DeckUnit::slotReadyRead()
         int delayTime = int(ret[3])*(pow(2,8)) + (ret[4]);
     }
     else if(int(ret.at(2)) == 0x01){//设置重复间隔
-        m_showTxtFunc(QStringLiteral("设置重复间隔完成!"));
+        //        m_showTxtFunc(QStringLiteral("设置重复间隔完成!"));
     }else if(int(ret.at(2)) == 0x02){//设置重复次数
-        m_showTxtFunc(QStringLiteral("设置重复次数完成!"));
+        //        m_showTxtFunc(QStringLiteral("设置重复次数完成!"));
     }
 }
 
@@ -118,6 +122,13 @@ void DeckUnit::createWg()
     gridLayout->addWidget(portLabel,1,0);
     gridLayout->addWidget(m_portEdit,1,1);
 
+    //EPC编号-区分GOBS
+    QLabel *epcLabel = new QLabel(QStringLiteral("EPC编号："));
+    m_epcCbx = new QComboBox(this);
+    m_epcCbx->setEditable(true);
+    gridLayout->addWidget(epcLabel,2,0);
+    gridLayout->addWidget(m_epcCbx,2,1);
+
     QVBoxLayout *vLayout = new QVBoxLayout;
 
     vLayout->addLayout(gridLayout);
@@ -134,6 +145,7 @@ void DeckUnit::createWg()
 
     vLayout->addWidget(connectCbx,0,Qt::AlignLeft|Qt::AlignVCenter);
     vLayout->addWidget(m_optWidget);
+
 
     connect(connectCbx,&QCheckBox::toggled,this,&DeckUnit::slotConnect);
     connect(startBtn,&QPushButton::clicked,this,&DeckUnit::startTx);

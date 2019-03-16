@@ -1,6 +1,8 @@
 ﻿#include "gobs_location.h"
 #include "lapacke.h"
 
+#include <math.h>
+
 int cal_location(Point p1, Point p2, Point p3
                                         , float t1, float t2, float t3, float watervel,Point *p_obs)
 {
