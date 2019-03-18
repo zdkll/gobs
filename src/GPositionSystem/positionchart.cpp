@@ -157,12 +157,34 @@ void PositionChartDrawer::rePaint(QPainter *pt)
     pt->setPen(Qt::black);
     pt->drawRect(graphRect());
 
+    QPoint  beginPt = graphRect().bottomLeft();
+    int height = graphRect().height();
+    int width  = graphRect().width();
+
     //绘制GPS轨迹曲线
     pt->save();
+    //移动到图像左下角
+    pt->translate(graphRect().bottomLeft());
 
+    float x,y;
+    float phyWidth = m_dataScope.maxX - m_dataScope.minX;
+    float phyHeight = m_dataScope.maxY - m_dataScope.minY;
 
+    QScopedArrayPointer<QPoint> pts(new QPoint[m_gpsCords.size()]);
+    for(int i=0;i<m_gpsCords.size();i++){
+        x =beginPt.x()+ (m_gpsCords[i].x- m_dataScope.minX)/phyWidth*width;
+        y =beginPt.y()- (m_gpsCords[i].y- m_dataScope.minY)/phyHeight*height;
+        pts[i] = QPoint(x,y);
+
+        //描点
+        pt->drawEllipse(pts[i],2,2);
+    }
 
     //绘制Gobs分布点
+    pt->drawPoints(pts.data(),m_gpsCords.size());
+
+    //绘制轨迹
+    pt->drawPolyline(pts.data(),m_gpsCords.size());
 
     pt->restore();
 }

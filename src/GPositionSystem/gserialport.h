@@ -23,7 +23,7 @@ public:
     bool isOpen(){return m_serialPort->isOpen();}
     QSerialPort *serialPort(){return m_serialPort;}
 
-    void setShowTxtFunc(ShowTextFunc func);
+//    void setShowTxtFunc(ShowTextFunc func);
 signals:
     void recvGpsCord(const GpsCoord& );
     void gpsErrorOccurs();
@@ -39,7 +39,7 @@ private:
     QSerialPort *m_serialPort;
     QByteArray  m_byteArray;
     QTimer   *m_timer = Q_NULLPTR;
-    ShowTextFunc m_showTxtFunc;
+//    ShowTextFunc m_showTxtFunc;
 
     static QMap<int,QSerialPort::BaudRate>   mpBaudRate;
     static QMap<int,QSerialPort::DataBits>     mpDatabit;

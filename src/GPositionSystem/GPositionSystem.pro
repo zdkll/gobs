@@ -13,6 +13,8 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
+CONFIG += c++11
+
 LIBS += -L$$GOBS_LIB  -lCore -lAlgorithm -lKalman -lGPublicSo -lChart
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \

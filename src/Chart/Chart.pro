@@ -11,6 +11,8 @@ TEMPLATE = lib
 
 include (../../gobs.pri)
 
+CONFIG += c++11
+
 DEFINES += CHART_LIBRARY
 
 SOURCES += chart.cpp \

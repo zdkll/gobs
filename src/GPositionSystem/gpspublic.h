@@ -4,6 +4,7 @@
 #include <QtGlobal>
 #include <functional>
 
+
 //GPS 坐标
 struct Coord
 {
@@ -36,7 +37,7 @@ struct DataScope
 };
 
 
-typedef std::function<void (const QString &)> ShowTextFunc;
+//typedef std::function<void (const QString &)> ShowTextFunc;
 
 
 #endif // GPSPUBLIC_H

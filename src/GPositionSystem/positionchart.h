@@ -56,6 +56,10 @@ private:
     void calDataScope();
     void expandDataScope(DataScope *datascope);
 
+    //绘制GPS点
+    void drawGpsPoints();
+   //绘制
+
     DataScope m_dataScope;
 
     QVector<GpsCoord>   m_gpsCords;

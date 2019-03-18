@@ -14,13 +14,14 @@ class DeckUnit;
 class IpAddrEdit;
 class QLineEdit;
 class QCheckBox;
+class QComboBox;
 //负责与甲板机通信数据
 class DeckUnit : public QWidget
 {
     Q_OBJECT
 public:
     DeckUnit(QWidget *parent = Q_NULLPTR);
-    void setShowTxtFunc(ShowTextFunc func);
+//    void setShowTxtFunc(ShowTextFunc func);
 
 protected slots:
     void slotConnect(bool connect);
@@ -36,11 +37,13 @@ private:
 private:
     Ui::DeckUnit   *ui;
     QTcpSocket    *m_socket;
-    ShowTextFunc m_showTxtFunc;
+//    ShowTextFunc m_showTxtFunc;
 
     //控件
     IpAddrEdit *m_ipAddrEdit;
     QLineEdit  *m_portEdit;
+    QComboBox *m_epcCbx;
+
     QWidget    *m_optWidget;
 };
 

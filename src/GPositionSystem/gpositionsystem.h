@@ -42,7 +42,7 @@ private:
     //=============================
     QPushButton  *m_startBtn,*m_stopBtn;
     QTextBrowser *m_textBrowser;
-    ShowTextFunc m_showTxtFunc;
+//    ShowTextFunc m_showTxtFunc;
 };
 
 #endif // GPOSITIONSYSTEM_H
