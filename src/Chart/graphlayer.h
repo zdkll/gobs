@@ -37,6 +37,7 @@ public:
     GraphLayer(QObject *parent = 0);
 
     void setLayerInfo(LayerInfo *layerInfo){m_layerInfo = layerInfo;}
+    LayerInfo *layerInfo(){return m_layerInfo;}
     virtual void draw();
 
 private:

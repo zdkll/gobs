@@ -24,9 +24,10 @@ public:
 
 private:
     void initChart();//初始化图层
+    void updateAxisScope(const DataScope& dataScope);
 
     PositionChartDrawer *m_posChartDrawer;
-    ValueAxis                  *m_axisX,*m_axisY;
+    ValueAxis                   *m_axisX,*m_axisY;
 };
 
 
@@ -57,8 +58,9 @@ private:
     void expandDataScope(DataScope *datascope);
 
     //绘制GPS点
-    void drawGpsPoints();
-   //绘制
+    void drawGpsPoints(QPainter *painter);
+    //绘制
+    void drawGobsPoints(QPainter *painter);
 
     DataScope m_dataScope;
 
@@ -66,27 +68,6 @@ private:
     QVector<GobsCoord> m_gobsCords;
 };
 
-
-//X坐标轴-Y坐标轴-连续值-统一处理
-class ValueAxis  : public AbstractAxis
-{
-public:
-    ValueAxis(QObject *parent = 0);
-
-    inline void setMin(float minVal){m_minVal = minVal;dataChanged();}
-    inline float min() const{return m_minVal;}
-
-    inline void setMax(float maxVal){m_maxVal = maxVal;dataChanged();}
-    inline float max() const{return m_maxVal;}
-
-protected:
-    virtual void calData();//计算数据
-    virtual void rePaint(QPainter* pt);//重新绘制(数据或者绘图范围改变都要重新绘制)
-
-private:
-    float m_minVal= 0;
-    float m_maxVal = 0;
-};
 
 
 #endif // POSITIONCHART_H

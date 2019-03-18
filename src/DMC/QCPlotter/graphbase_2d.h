@@ -1,4 +1,4 @@
-#ifndef GRAPHBASE_2D_H
+﻿#ifndef GRAPHBASE_2D_H
 #define GRAPHBASE_2D_H
 
 #define ZOOM_MIN_PIXEL 3
@@ -181,28 +181,6 @@ struct GraphAttribute
 };
 
 
-//离散刻度信息
-struct DScaleUnit
-{
-    DScaleUnit():
-        pixCount(1.0),dataCount(1)
-      ,pixOffset(0.0),dataOffset(0){}
-    float pixCount;  //像素数
-    int   dataCount; //包含的数据宽度,一般是1
-    float pixOffset; //每道数据展宽的一半
-    int   dataOffset;
-};
-
-//连续刻度信息
-struct CScaleUnit
-{
-    CScaleUnit():
-        corMin(0.0),corStep(1.0),corNum(1){}
-    float corMin; //起始值
-    float corStep;//步长
-    int   corNum; //数量
-};
-
 const QStringList showHeaderPosList = QStringList()<<"Trace No."
                                                   <<"FFID"
                                                  <<"TraceSeqFFID"
@@ -232,11 +210,6 @@ int getGoodStep(int width, int step, int horizNum,const int minPix = 4);
 //从数据中统计道极值/全局极值
 void getTraceExtremumFromData(float *data, int sd, int fd, float *valminl, float *valmaxl, float *minGlobal, float *maxGlobal);
 
-//离散型刻度计算，一般用于不连续刻度，如横坐标显示道等
-DScaleUnit makeDeparatedUnit(int pixWidth,int dataNum,int pixLen);
-
-//连续型刻度计算，用于时间，深度，距离等计算
-CScaleUnit makeContinuousUnit(float min,float max,int pixWidth,int pixLen);
 }
 
 #endif // GRAPHBASE_2D_H

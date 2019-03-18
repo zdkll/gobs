@@ -19,13 +19,15 @@ GPositionSystem::GPositionSystem(QWidget *parent) :
     ui(new Ui::GPositionSystem)
 {
     ui->setupUi(this);
-//    m_showTxtFunc = std::bind(&GPositionSystem::showText,this,std::placeholders::_1);
+    //    m_showTxtFunc = std::bind(&GPositionSystem::showText,this,std::placeholders::_1);
 
     createWg();
 
     this->resize(1000,520);
 
     connect(m_gSerialPort,&GSerialPort::recvGpsCord,this,&GPositionSystem::slotRecvGpsCord);
+
+    testData();
 }
 
 GPositionSystem::~GPositionSystem()
@@ -111,11 +113,37 @@ void GPositionSystem::createWg()
 
     this->setLayout(mainLayout);
 
-//    m_gSerialPort->setShowTxtFunc(m_showTxtFunc);
-//    m_deckUnit->setShowTxtFunc(m_showTxtFunc);
+    //    m_gSerialPort->setShowTxtFunc(m_showTxtFunc);
+    //    m_deckUnit->setShowTxtFunc(m_showTxtFunc);
 
     connect(m_startBtn,&QPushButton::clicked,this,&GPositionSystem::startPostion);
     connect(m_stopBtn,&QPushButton::clicked,this,&GPositionSystem::stopPostion);
 
     connect(titleBar,&TitleBar::sideBarHide,leftWidget,&QWidget::setHidden);
+}
+
+void GPositionSystem::testData()
+{
+    //模拟数据传递给画图控件绘制
+    int N = 100;
+    QVector<GpsCoord>   gpsCords;
+    QVector<GobsCoord> gobsCords;
+    float x0 = 100000;
+    float y0 =  2000000;
+    float x,y;
+    for(int i=0;i<N;i++){
+        GpsCoord cord;
+        cord.x = x0+i*100;
+        cord.y = y0+rand()%10000;
+        gpsCords.append(cord);
+
+        if(i%4 ==0){
+            GobsCoord gobs_cord;
+            gobs_cord.x = x0+i*100;
+            gobs_cord.y = y0+rand()%10000;
+            gobsCords.append(gobs_cord);
+        }
+    }
+
+    m_positionChart->setData(gpsCords,gobsCords);
 }

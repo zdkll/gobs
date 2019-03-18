@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <QPainter>
 
+#include "axis.h"
+
 #include <QDebug>
 
 PositionChart::PositionChart(QWidget *parent)
@@ -17,11 +19,7 @@ void PositionChart::setData(const QVector<GpsCoord> &cord1s, const QVector<GobsC
 
     DataScope dataScope = m_posChartDrawer->dataScope();
 
-    m_axisX->setMin(dataScope.minX);
-    m_axisX->setMax(dataScope.maxX);
-
-    m_axisY->setMin(dataScope.minY);
-    m_axisY->setMax(dataScope.maxY);
+    updateAxisScope(dataScope);
 
     m_posChartDrawer->draw();
 }
@@ -32,11 +30,7 @@ void PositionChart::addGpsPoint(const GpsCoord &cord)
 
     DataScope dataScope = m_posChartDrawer->dataScope();
 
-    m_axisX->setMin(dataScope.minX);
-    m_axisX->setMax(dataScope.maxX);
-
-    m_axisY->setMin(dataScope.minY);
-    m_axisY->setMax(dataScope.maxY);
+    updateAxisScope(dataScope);
 
     m_posChartDrawer->draw();
 }
@@ -47,11 +41,7 @@ void PositionChart::addGobsPoint(const GobsCoord &cord)
 
     DataScope dataScope = m_posChartDrawer->dataScope();
 
-    m_axisX->setMin(dataScope.minX);
-    m_axisX->setMax(dataScope.maxX);
-
-    m_axisY->setMin(dataScope.minY);
-    m_axisY->setMax(dataScope.maxY);
+    updateAxisScope(dataScope);
 
     m_posChartDrawer->draw();
 }
@@ -78,12 +68,24 @@ void PositionChart::initChart()
     m_axisX = new ValueAxis(this);
     m_axisY = new ValueAxis(this);
 
+    m_axisX->setMinSpacing(50);
+    m_axisY->setMinSpacing(40);
+
     m_posChartDrawer->addAxis(Qt::AlignBottom,m_axisX);
     m_posChartDrawer->addAxis(Qt::AlignLeft,m_axisY);
 
     //设置margin 和 坐标轴占的空间
     m_posChartDrawer->setContentMargins(QMargins(5,5,5,5));
-    m_posChartDrawer->setAixsSpaces(AxisSpaces(40,20,40,20));
+    m_posChartDrawer->setAixsSpaces(AxisSpaces(60,20,40,20));
+}
+
+void PositionChart::updateAxisScope(const DataScope &dataScope)
+{
+    m_axisX->setMin(dataScope.minX);
+    m_axisX->setMax(dataScope.maxX);
+
+    m_axisY->setMin(dataScope.minY);
+    m_axisY->setMax(dataScope.maxY);
 }
 
 
@@ -156,35 +158,14 @@ void PositionChartDrawer::rePaint(QPainter *pt)
     //绘制边框
     pt->setPen(Qt::black);
     pt->drawRect(graphRect());
-
-    QPoint  beginPt = graphRect().bottomLeft();
-    int height = graphRect().height();
-    int width  = graphRect().width();
-
+    pt->setRenderHint(QPainter::Antialiasing,true);
     //绘制GPS轨迹曲线
     pt->save();
-    //移动到图像左下角
-    pt->translate(graphRect().bottomLeft());
 
-    float x,y;
-    float phyWidth = m_dataScope.maxX - m_dataScope.minX;
-    float phyHeight = m_dataScope.maxY - m_dataScope.minY;
+    drawGpsPoints(pt);
 
-    QScopedArrayPointer<QPoint> pts(new QPoint[m_gpsCords.size()]);
-    for(int i=0;i<m_gpsCords.size();i++){
-        x =beginPt.x()+ (m_gpsCords[i].x- m_dataScope.minX)/phyWidth*width;
-        y =beginPt.y()- (m_gpsCords[i].y- m_dataScope.minY)/phyHeight*height;
-        pts[i] = QPoint(x,y);
-
-        //描点
-        pt->drawEllipse(pts[i],2,2);
-    }
-
-    //绘制Gobs分布点
-    pt->drawPoints(pts.data(),m_gpsCords.size());
-
-    //绘制轨迹
-    pt->drawPolyline(pts.data(),m_gpsCords.size());
+    pt->setPen(Qt::red);
+    drawGobsPoints(pt);
 
     pt->restore();
 }
@@ -212,15 +193,7 @@ void PositionChartDrawer::calDataScope()
         m_dataScope.maxY= std::max(m_dataScope.maxY,float(m_gpsCords[i].y));
     }
 
-    //往外延伸1/10范围
-    float dx = (m_dataScope.maxX - m_dataScope.minX)*0.05;
-    float dy = (m_dataScope.maxY - m_dataScope.minY)*0.05;
-    m_dataScope.maxX += dx;
-    m_dataScope.minX  -= dx;
-
-    m_dataScope.minY  -=dy;
-    m_dataScope.maxY +=dy;
-
+    qDebug()<<m_dataScope.minX<<m_dataScope.maxX<<m_dataScope.maxY<<m_dataScope.minY;
     //统计GOBS
     if(m_gobsCords.size()<1){
         m_dataScope.minZ =m_dataScope.maxZ = 0;
@@ -257,24 +230,47 @@ void PositionChartDrawer::expandDataScope(DataScope *datascope)
     datascope->maxY +=dy;
 }
 
-
-///ValueAxis----
-ValueAxis::ValueAxis(QObject *parent)
-    :AbstractAxis(parent)
+void PositionChartDrawer::drawGpsPoints(QPainter *pt)
 {
+    QPoint  beginPt = graphRect().bottomLeft();
+    int height = graphRect().height();
+    int width  = graphRect().width();
 
+    float x,y;
+    float phyWidth = m_dataScope.maxX - m_dataScope.minX;
+    float phyHeight = m_dataScope.maxY - m_dataScope.minY;
+
+    QScopedArrayPointer<QPoint> pts(new QPoint[m_gpsCords.size()]);
+    for(int i=0;i<m_gpsCords.size();i++){
+        x =beginPt.x()+ (m_gpsCords[i].x- m_dataScope.minX)/phyWidth*width;
+        y =beginPt.y()- (m_gpsCords[i].y- m_dataScope.minY)/phyHeight*height;
+        pts[i] = QPoint(x,y);
+
+        //描点
+        pt->drawEllipse(pts[i],2,2);
+    }
+
+    //绘制轨迹
+    pt->drawPolyline(pts.data(),m_gpsCords.size());
 }
 
-void ValueAxis::calData()
+void PositionChartDrawer::drawGobsPoints(QPainter *pt)
 {
+    QPoint  beginPt = graphRect().bottomLeft();
+    int height = graphRect().height();
+    int width  = graphRect().width();
 
-}
+    float phyWidth = m_dataScope.maxX - m_dataScope.minX;
+    float phyHeight = m_dataScope.maxY - m_dataScope.minY;
 
-void ValueAxis::rePaint(QPainter *pt)
-{
-    pt->setPen(Qt::blue);
-    pt->drawRect(QRect(0,0,geometry().width()-1,geometry().height()-1));
-    pt->drawText(QRect(0,0,geometry().width()-1,geometry().height()-1),Qt::AlignCenter,QString::number(this->alignment()));
+    QPoint p;
+    for(int i=0;i<m_gobsCords.size();i++){
+        p.setX(beginPt.x()+ (m_gobsCords[i].x- m_dataScope.minX)/phyWidth*width);
+        p.setY(beginPt.y()- (m_gobsCords[i].y- m_dataScope.minY)/phyHeight*height);
+
+        //描点
+        pt->drawRect(QRect(p+QPoint(-2,-2) ,p+QPoint(2,2)));
+    }
 }
 
 

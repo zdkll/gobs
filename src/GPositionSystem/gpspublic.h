@@ -37,6 +37,17 @@ struct DataScope
 };
 
 
+
+#ifdef __cplusplus
+extern "C"{
+#endif
+
+//计算刻度的距离
+
+#ifdef __cplusplus
+}
+#endif
+
 //typedef std::function<void (const QString &)> ShowTextFunc;
 
 

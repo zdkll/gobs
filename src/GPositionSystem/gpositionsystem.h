@@ -33,6 +33,8 @@ protected slots:
 private:
     void createWg();
 
+    void testData();
+
     Ui::GPositionSystem *ui;
     GSerialPort   *m_gSerialPort;
 

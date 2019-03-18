@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     datamanager.cpp \
     deckunit.cpp \
     positionchart.cpp \
-    postioncontrols.cpp
+    postioncontrols.cpp \
+    axis.cpp
 
 HEADERS  += gpositionsystem.h \
     gserialport.h \
@@ -51,7 +52,8 @@ HEADERS  += gpositionsystem.h \
     datamanager.h \
     deckunit.h \
     positionchart.h \
-    postioncontrols.h
+    postioncontrols.h \
+    axis.h
 
 FORMS    += gpositionsystem.ui \
     gserialport.ui \

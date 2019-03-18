@@ -27,4 +27,5 @@ GPUBLICSOSHARED_EXPORT bool isFileInPeriod(const QString filename);
 
 GPUBLICSOSHARED_EXPORT int swap3(unsigned char* P);
 
+
 #endif // PUBLICFUNCTIONS_H

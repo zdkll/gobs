@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include "toolsalgo.h"
+#include "graphfunctions.h"
 
 QCGraphBase::QCGraphBase(QWidget *parent)
     : QWidget(parent),m_gatherInfo(0)
@@ -630,7 +631,7 @@ void QCGraphBase::drawHScale(QPainter *painter)
     int traceStep      = m_graphDataInfo.traceStep;
     int minLen         = m_graphAttribute->horiAxesMinLen;
     //横向刻度,根据label 最小间距计算显示道间距
-    DScaleUnit unit = ImageBaseFunction::makeDeparatedUnit(m_GraphRect.width()
+    DScaleUnit unit = GraphFunctions::makeDeparatedUnit(m_GraphRect.width()
                                                            ,disTraceNum,minLen);
     //qDebug()<<"data count:"<<unit.dataCount
     //           <<"data offset:"<<unit.dataOffset
@@ -676,7 +677,7 @@ void QCGraphBase::drawVScale(QPainter *painter)
     int minLen   = m_graphAttribute->vertAxesMinLen;
     float v_scale = float(m_GraphRect.height())/(maxVal - minVal);
 
-    CScaleUnit unit = ImageBaseFunction::makeContinuousUnit(minVal,maxVal,m_GraphRect.height()
+    CScaleUnit unit = GraphFunctions::makeContinuousUnit(minVal,maxVal,m_GraphRect.height()
                                                             ,minLen);
     //qDebug()<<unit.corMin<<unit.corNum<<unit.corStep;
     float ypos,ypos1;

@@ -18,12 +18,12 @@ TEMPLATE = lib
 include(../../../gobs.pri)
 
 
-
 DEFINES += QCPLOTTER_LIBRARY
 
 LIBS      += -L$$GOBS_DIR/lib -lGPublicSo -lAlgorithm
 
-INCLUDEPATH += $$GOBS_SRC/Algorithm
+INCLUDEPATH += $$GOBS_SRC/Algorithm \
+                              $$GOBS_SRC/GPublicSo
 
 SOURCES += main.cpp\
         qcplotter.cpp \
