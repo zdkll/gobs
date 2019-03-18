@@ -52,10 +52,9 @@ protected:
     virtual void calData();//计算数据
     virtual void rePaint(QPainter* pt);//重新绘制(数据或者绘图范围改变都要重新绘制)
 
-
-
 private:
     void calDataScope();
+    void expandDataScope(DataScope *datascope);
 
     DataScope m_dataScope;
 

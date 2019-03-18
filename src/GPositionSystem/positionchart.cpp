@@ -190,13 +190,25 @@ void PositionChartDrawer::calDataScope()
         m_dataScope.maxY= std::max(m_dataScope.maxY,float(m_gpsCords[i].y));
     }
 
+    //往外延伸1/10范围
+    float dx = (m_dataScope.maxX - m_dataScope.minX)*0.05;
+    float dy = (m_dataScope.maxY - m_dataScope.minY)*0.05;
+    m_dataScope.maxX += dx;
+    m_dataScope.minX  -= dx;
+
+    m_dataScope.minY  -=dy;
+    m_dataScope.maxY +=dy;
+
+    //统计GOBS
     if(m_gobsCords.size()<1){
         m_dataScope.minZ =m_dataScope.maxZ = 0;
+        //往外延伸1/10范围
+        expandDataScope(&m_dataScope);
         return;
     }
 
     m_dataScope.minZ =m_dataScope.maxZ = m_gobsCords[0].z;
-    //统计GOBS
+
     for(int i=0;i<m_gobsCords.size();i++){
         m_dataScope.minX = std::min(m_dataScope.minX,float(m_gobsCords[i].x));
         m_dataScope.maxX= std::max(m_dataScope.maxX,float(m_gobsCords[i].x));
@@ -207,6 +219,20 @@ void PositionChartDrawer::calDataScope()
         m_dataScope.minZ = std::min(m_dataScope.minZ,float(m_gobsCords[i].z));
         m_dataScope.maxZ= std::max(m_dataScope.maxZ,float(m_gobsCords[i].z));
     }
+
+    //往外延伸1/10范围
+    expandDataScope(&m_dataScope);
+}
+
+void PositionChartDrawer::expandDataScope(DataScope *datascope)
+{
+    float dx = (datascope->maxX - datascope->minX)*0.05;
+    float dy = (datascope->maxY - datascope->minY)*0.05;
+    datascope->maxX += dx;
+    datascope->minX  -= dx;
+
+    datascope->minY  -=dy;
+    datascope->maxY +=dy;
 }
 
 
