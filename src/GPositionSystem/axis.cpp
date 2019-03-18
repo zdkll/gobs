@@ -81,7 +81,7 @@ void ValueAxis::drawLeftAxis(QPainter *pt)
 
         pt->drawLine(x,y, x-5,y);
 
-        text = QString::number(value,'g',2);
+        text = QString::number(value,'g',4);
         pt->drawText(x- fontMetrics.width(text)-5,y+fontMetrics.height()/2,text);
     }
 }
