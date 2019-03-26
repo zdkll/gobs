@@ -17,9 +17,12 @@ include(../../gobs.pri)
 
 INCLUDEPATH += $$GOBS_DIR/include
 
-INCLUDEPATH += $$GOBS_SRC/GPositionSystem
+INCLUDEPATH += $$GOBS_SRC/GPositionSystem \
+        $$GOBS_THIRDPARTY/include
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem
+
+LIBS += -L$$GOBS_THIRDPARTY/lib  -lfftw3d
 
 
 SOURCES += main.cpp\
