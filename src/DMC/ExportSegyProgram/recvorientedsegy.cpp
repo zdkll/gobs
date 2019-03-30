@@ -2,6 +2,7 @@
 #include "gsqlfunctions.h"
 #include "toolsalgo.h"
 #include "gpublicfunctions.h"
+#include "responseprocessor.h"
 
 #define  DataFileList       "DataFile.lst"
 #define  TimeErrFile        "TimeErr.log"
@@ -9,9 +10,7 @@
 #define  DataFileFilter     "[0-9A-F]+\\.[0-9A-F]+"
 
 #define First_Data_File_No   "0001"
-
 #define Data_File_Size        125829120    //120*1024*1024 B
-
 #define Data_File_Sample_Size 10485760     //10*1024*1024
 //文件时间跨度大小,ms,以1000 为基准
 #define Data_File_Msec_Size   10*1024*1024
@@ -19,6 +18,7 @@
 //最大钟差，1s
 #define Max_Time_Err           1.0
 
+#define ENABLE_UNRESPONSE    1
 
 const  double TC0  = 3145728000;
 const  double PCLK0= (TC0/256.0);
@@ -30,6 +30,8 @@ RecvOrientedSegy::RecvOrientedSegy()
     m_traceHead = 0;
     m_data      = 0;
     m_shotLineTimes  = 0;
+
+    m_respProcessor = new  ResponseProcessor();
 }
 RecvOrientedSegy::~RecvOrientedSegy()
 {
@@ -45,6 +47,9 @@ RecvOrientedSegy::~RecvOrientedSegy()
         delete[] m_data;
     qDeleteAll(m_depolyedDevices);
     m_depolyedDevices.clear();
+
+    if(m_respProcessor)
+        delete m_respProcessor;
 }
 
 bool RecvOrientedSegy::preProcesss()
@@ -69,6 +74,9 @@ bool RecvOrientedSegy::preProcesss()
     ok = allocInitMemory();
     if(!ok)
         return ok;
+
+    //5 设备去响应预处理
+    m_respProcessor->preProcess(m_Parameter.traceNs,float(m_Parameter.ds)/1000.f);
 
     return true;
 }
@@ -158,6 +166,13 @@ bool RecvOrientedSegy::run()
     qDebug()<<QString("%1 GOBS completed , %2 Failed.").arg(finishedCount)
               .arg(depolyedDevices.size() - finishedCount);
     return true;
+}
+
+bool RecvOrientedSegy::finalize()
+{
+    AbstractSegyProducer::finalize();
+
+    m_respProcessor->postProcess();
 }
 
 bool RecvOrientedSegy::getDevicesInfo()
@@ -720,7 +735,6 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
     int in_ds  = 1000/sps; //ds:ms
     int in_ns  = float(msec)*float(sps)/1000.0;
     float *in  = new float[in_ns*4]; //四个分量
-
     double  output_err;
     //遍历炮线,默认按照炮线方向，炮时递增的，所以文件向递增方向找
     int file_index = 0;m_traceHead->ep = 1;
@@ -804,6 +818,7 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
                             int  ns = in_ns;
                             //计算样点时间偏移(相对当前文件)
                             long long time_offset = fileInfos[file_index]->dateTime.msecsTo(Ti_time);
+                            //采样点偏差
                             int sample_offset     = qRound(double(time_offset)*(double(sps)/1000.0));
                             //实际取数据的时间
                             QDateTime revisedTime = fileInfos[file_index]->dateTime.addMSecs(sample_offset*(1000/sps));
@@ -873,6 +888,21 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
                                 return false;
                             }
                         }
+
+                        /***************FFTW 去响应**********************/
+#if ENABLE_UNRESPONSE
+
+                        double    *temp = new double[out_ns];
+                        for(int i=0;i<4;i++){
+                            for(int j=0;j<out_ns;j++)
+                                temp[j] = m_data[i*out_ns+j];
+                            m_respProcessor->fftwResponseProcess(temp);
+                            for(int j=0;j<out_ns;j++)
+                                m_data[i*out_ns+j] = temp[j];
+                        }
+                        delete[] temp;
+#endif
+
                         //数据写入
                         for(int i=0;i<4;i++){
                             gobs_write_segy_func(m_segyFileHandle->fileHandles[i].openTrace,m_traceHead,(char*)(m_data+i*out_ns),&isOk);

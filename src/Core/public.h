@@ -64,7 +64,7 @@ struct ExportSegyParameter
     QString   projectPath;
     QString   projectName;
     QString   areaName;
-    int       traceNs;
+    int       traceNs;//样点数
     int       ds;     //采样点时间间隔 ms
 
     QString   dataPath;

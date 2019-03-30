@@ -22,7 +22,7 @@ INCLUDEPATH += $$GOBS_SRC/GPositionSystem \
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem
 
-LIBS += -L$$GOBS_THIRDPARTY/lib  -lfftw3d
+LIBS  +=  -L$$GOBS_THIRDPARTY/lib
 
 
 SOURCES += main.cpp\

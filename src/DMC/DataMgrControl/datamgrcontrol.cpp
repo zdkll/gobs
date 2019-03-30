@@ -201,11 +201,18 @@ void DataMgrControl::startExportSegyData(const ExportSegyParameter &parameter)
     //参数,job 文件------
     QStringList argList;
     argList<<jobFile;
-
+    QString program;
+#ifdef Q_OS_LINUX
     //程序
-    QString program = QApplication::applicationDirPath()
+    program = QApplication::applicationDirPath()
             +Dir_Separator+"ExportSegyProgram";
+#else  //Q_OS_WIN
+    program = QApplication::applicationDirPath()
+            +Dir_Separator+"ExportSegyProgram.exe";
+#endif
+
     QProcess process;
+
     process.startDetached(program,argList);
 }
 

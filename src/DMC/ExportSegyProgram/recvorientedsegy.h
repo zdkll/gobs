@@ -3,6 +3,7 @@
 
 #include "abstractsegyproducer.h"
 
+class ResponseProcessor;
 class RecvOrientedSegy : public AbstractSegyProducer
 {
 public:
@@ -11,6 +12,7 @@ public:
 protected:
     bool    preProcesss();
     bool    run();
+    bool   finalize();
 
 private:
     //查询数据文件目录，所有数据设备,从数据库查找其对应接受站点
@@ -61,7 +63,7 @@ private:
 private:
     QList<DepolyedDevice *> m_depolyedDevices;
     ShotLineTimes      *m_shotLineTimes;
-
+    ResponseProcessor *m_respProcessor;
     //输出文件
     SegyFileHandles *m_segyFileHandle;
     TraceHead       *m_traceHead;//道头

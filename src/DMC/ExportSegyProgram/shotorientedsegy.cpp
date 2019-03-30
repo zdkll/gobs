@@ -1,4 +1,5 @@
 #include "shotorientedsegy.h"
+#include "responseprocessor.h"
 
 #define RecvSegy_BHX_FileFilter "RecvLine*_bhx.segy"
 #define RecvSegy_BHY_FileFilter "RecvLine*_bhy.segy"
@@ -9,6 +10,7 @@ ShotOrientedSegy::ShotOrientedSegy()
 {
     m_recvFilesList = 0;
 }
+
 ShotOrientedSegy::~ShotOrientedSegy()
 {
     if(m_recvFilesList){
@@ -21,6 +23,7 @@ ShotOrientedSegy::~ShotOrientedSegy()
         delete[] m_data;
     if(m_traceHead)
         delete m_traceHead;
+
 }
 bool ShotOrientedSegy::preProcesss()
 {
@@ -36,10 +39,11 @@ bool ShotOrientedSegy::preProcesss()
     if(!ok)
         return ok;
 
-    //初始化文件卷头信息
+    //3 初始化文件卷头信息
     ok = allocInitMemory();
     if(!ok)
         return ok;
+
 
     return true;
 }
@@ -93,6 +97,7 @@ bool ShotOrientedSegy::run()
     return true;
 }
 
+
 //打开输出文件,初始化卷头信息
 bool ShotOrientedSegy::openLineSegyFiles(const StaLine &staLine,const int &start,const int &end)
 {
@@ -104,7 +109,7 @@ bool ShotOrientedSegy::openLineSegyFiles(const StaLine &staLine,const int &start
     QString fileName;
     int mode = Write_Only;
     int ok   = -1;
-    for(int i=0;i<4;i++){
+    for(int i=0;i<suffixs.size();i++){
         fileName = QString("ShotLine%1_%2-%3_%4.segy").arg(int(staLine.line),2,10,QChar('0'))
                 .arg(start).arg(end).arg(suffixs[i]);
         fileName = m_Parameter.outputPath +Dir_Separator+fileName;
