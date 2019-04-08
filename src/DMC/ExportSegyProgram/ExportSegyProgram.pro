@@ -18,16 +18,20 @@ TEMPLATE = app
 include(../../../gobs.pri)
 
 LIBS    += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo  -lAlgorithm
+LIBS    += -L$$GOBS_THIRDPARTY/lib -lfftw3
 
-INCLUDEPATH += $$GOBS_SRC/Algorithm
+INCLUDEPATH += $$GOBS_SRC/Algorithm \
+       $$GOBS_THIRDPARTY/include
 
 
 SOURCES += main.cpp \
     abstractsegyproducer.cpp \
     recvorientedsegy.cpp \
-    shotorientedsegy.cpp
+    shotorientedsegy.cpp \
+    responseprocessor.cpp
 
 HEADERS += \
     abstractsegyproducer.h \
     recvorientedsegy.h \
-    shotorientedsegy.h
+    shotorientedsegy.h \
+    responseprocessor.h
