@@ -2,7 +2,7 @@
 #include "gsqlfunctions.h"
 #include "toolsalgo.h"
 #include "gpublicfunctions.h"
-#include "responseprocessor.h"
+#include "responseprocessorf.h"
 
 #define  DataFileList       "DataFile.lst"
 #define  TimeErrFile        "TimeErr.log"
@@ -31,7 +31,7 @@ RecvOrientedSegy::RecvOrientedSegy()
     m_data      = 0;
     m_shotLineTimes  = 0;
 
-    m_respProcessor = new  ResponseProcessor();
+    m_respProcessor = new  ResponseProcessorf();
 }
 RecvOrientedSegy::~RecvOrientedSegy()
 {
@@ -172,7 +172,7 @@ bool RecvOrientedSegy::finalize()
 {
     AbstractSegyProducer::finalize();
 
-    m_respProcessor->postProcess();
+    return m_respProcessor->postProcess();
 }
 
 bool RecvOrientedSegy::getDevicesInfo()
@@ -875,8 +875,10 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
                                 }
                             }
                         }
-                        //插值
+
+                        //每一道数据：插值-去响应-数据写入
                         for(int i=0;i<4;i++){
+                            //1 插值
                             gobs_1D_interpolation_regular(in+i*in_ns,in_ns,xi0,in_ds,
                                                           m_data+i*out_ns,out_ns,0,out_ds,
                                                           0,0,LINEARINTER,&isOk);
@@ -887,24 +889,14 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
                                 m_errString = "Interpolation failed.";
                                 return false;
                             }
-                        }
 
-                        /***************FFTW 去响应**********************/
+                            /*2**************FFTW 去响应**********************/
 #if ENABLE_UNRESPONSE
+                            m_respProcessor->fftwResponseProcess(m_data+i*out_ns);
 
-                        double    *temp = new double[out_ns];
-                        for(int i=0;i<4;i++){
-                            for(int j=0;j<out_ns;j++)
-                                temp[j] = m_data[i*out_ns+j];
-                            m_respProcessor->fftwResponseProcess(temp);
-                            for(int j=0;j<out_ns;j++)
-                                m_data[i*out_ns+j] = temp[j];
-                        }
-                        delete[] temp;
 #endif
 
-                        //数据写入
-                        for(int i=0;i<4;i++){
+                            //3数据写入
                             gobs_write_segy_func(m_segyFileHandle->fileHandles[i].openTrace,m_traceHead,(char*)(m_data+i*out_ns),&isOk);
                             if(isOk !=0 )
                             {
@@ -931,6 +923,7 @@ bool RecvOrientedSegy::mainRecvProcess(DataFileInfo *dataFileInfo)
                     if(shotLineTime.shotTimes[shot]<startDateTime)
                         break;
                 }
+
             }
 
             m_traceHead->ep ++;

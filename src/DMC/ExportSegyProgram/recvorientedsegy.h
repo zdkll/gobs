@@ -1,9 +1,9 @@
-#ifndef RECVORIENTEDSEGY_H
+﻿#ifndef RECVORIENTEDSEGY_H
 #define RECVORIENTEDSEGY_H
 
 #include "abstractsegyproducer.h"
 
-class ResponseProcessor;
+class ResponseProcessorf;
 class RecvOrientedSegy : public AbstractSegyProducer
 {
 public:
@@ -63,7 +63,7 @@ private:
 private:
     QList<DepolyedDevice *> m_depolyedDevices;
     ShotLineTimes      *m_shotLineTimes;
-    ResponseProcessor *m_respProcessor;
+    ResponseProcessorf *m_respProcessor;
     //输出文件
     SegyFileHandles *m_segyFileHandle;
     TraceHead       *m_traceHead;//道头

@@ -18,11 +18,10 @@ include(../../gobs.pri)
 INCLUDEPATH += $$GOBS_DIR/include
 
 INCLUDEPATH += $$GOBS_SRC/GPositionSystem \
-        $$GOBS_THIRDPARTY/include
+        $$GOBS_THIRDPARTY_LIB/include  \
+        $$GOBS_SRC/GPublicSo
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem
-
-LIBS  +=  -L$$GOBS_THIRDPARTY/lib
 
 
 SOURCES += main.cpp\
@@ -30,13 +29,13 @@ SOURCES += main.cpp\
     mainwinpublic.cpp \
     mainwinunit.cpp \
     exportspsfilesdlg.cpp \
-    logindlg.cpp
+    logindlg.cpp \
 
 HEADERS  += mainwindow.h \
     mainwinpublic.h \
     mainwinunit.h \
     exportspsfilesdlg.h \
-    logindlg.h
+    logindlg.h \
 
 FORMS    += mainwindow.ui \
     exportspsfilesdlg.ui \
@@ -44,8 +43,12 @@ FORMS    += mainwindow.ui \
 
 
 win32{
-target.files  = $$GOBS_THIRDPARTY/lib/*.dll
+target.files  = $$GOBS_THIRDPARTY_LIB/*.dll
 target.path = $$GOBS_BIN
-INSTALLS += target
+
+depend.files  = $$GOBS_LIB/*.dll
+depend.path = $$GOBS_BIN
+
+INSTALLS += depend target
 }
 

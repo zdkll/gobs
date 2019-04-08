@@ -12,7 +12,7 @@ INCLUDEPATH += armadillo_bits \
 
 DEFINES += KALMAN_LIBRARY
 
-LIBS += -L$$GOBS_THIRDPARTY/lib -llibblas -lliblapack
+LIBS += -L$$GOBS_THIRDPARTY_LIB -llibblas -lliblapack
 
 SOURCES += main.cpp \
     kalman.cpp

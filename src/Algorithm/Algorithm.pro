@@ -11,11 +11,11 @@ TEMPLATE = lib
 
 include(../../gobs.pri)
 
-LIBS += -L$$GOBS_THIRDPARTY/lib -llibblas -lliblapack -lliblapacke
+LIBS += -L$$GOBS_THIRDPARTY_LIB -llibblas -lliblapack -lliblapacke
 
 DEFINES += ALGORITHM_LIBRARY ADD_   HAVE_LAPACK_CONFIG_H  LAPACK_COMPLEX_STRUCTURE
 
-INCLUDEPATH += $$GOBS_THIRDPARTY/include
+INCLUDEPATH += $$GOBS_THIRDPARTY_LIB/include
 
 
 SOURCES += algorithm.cpp \
