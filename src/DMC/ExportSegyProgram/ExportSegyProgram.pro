@@ -17,8 +17,8 @@ TEMPLATE = app
 
 include(../../../gobs.pri)
 
-LIBS    += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo  -lAlgorithm
-LIBS    += -L$$GOBS_THIRDPARTY/lib -lfftw3
+LIBS  += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo  -lAlgorithm
+LIBS  +=  -L$$GOBS_THIRDPARTY/lib -llibfftw3-3
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \
        $$GOBS_THIRDPARTY/include

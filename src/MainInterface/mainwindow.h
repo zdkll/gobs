@@ -16,7 +16,7 @@ class MainWindow;
 }
 
 class QToolButton;
-
+class GPositionSystem;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,19 +24,21 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    //void resizeEvent(QResizeEvent *e);
-
 private slots:
+    //Project
     int  slotOpenProject();
     int  slotOpenProject(const QString &proName);
     void slotNewProject();
 
+    //Module
     void slotAboutModule(const QString &modName);
     void slotRunModule(const QString &modName = QString());
 
     //启动生成sps文件
     void slotExportSPSFiles();
+    void slotGpsPosition();
 
+    //Help
     void slotHelp();
 
 private:
@@ -61,6 +63,8 @@ private:
     //所有的进程，程序标识+进程
     QMap<QString,QProcess*>  m_processes;
     ExportSPSFilesDlg       *m_exportSpsFileDlg;
+
+    GPositionSystem  *m_gpsPositionSystem;
 };
 
 #endif // MAINWINDOW_H

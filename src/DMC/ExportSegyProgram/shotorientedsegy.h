@@ -40,6 +40,7 @@ protected:
     bool    preProcesss();
     bool    run();
 
+private:
     //打开输出文件,初始化卷头信息
     bool openLineSegyFiles(const StaLine &staLine,const int &start,const int &end);
     bool closeSegyFiles();
@@ -60,8 +61,9 @@ private:
     //输出文件
     SegyFileHandles *m_segyFileHandle;
     TraceHead *m_traceHead;
+
     char      *m_data;
-    int        m_ns;
+    int          m_ns;
 };
 
 #endif // SHOTORIENTEDSEGY_H

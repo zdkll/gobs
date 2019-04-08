@@ -17,11 +17,13 @@
 #include <QMessageBox>
 
 #include "gassistant.h"
+#include "gpositionsystem.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+  ,m_gpsPositionSystem(0)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
@@ -44,13 +46,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete m_projManager;
+    if(m_gpsPositionSystem)
+        delete m_gpsPositionSystem;
 }
-
-//#include <QResizeEvent>
-//void MainWindow::resizeEvent(QResizeEvent *e)
-//{
-//    qDebug()<<e->size();
-//}
 
 void MainWindow::initWindow()
 {
@@ -148,8 +146,6 @@ void MainWindow::initWindow()
 
     connect(openProjBtn,SIGNAL(clicked()),this,SLOT(slotOpenProject()));
     connect(newProjBtn,SIGNAL(clicked()),this,SLOT(slotNewProject()));
-
-
 }
 
 void MainWindow::initMenu()
@@ -184,6 +180,7 @@ void MainWindow::initMenu()
 
     //Tools Menu----------------
     ui->menuTools->addAction(tr("&Export SPS Files"),this,SLOT(slotExportSPSFiles()));
+    ui->menuTools->addAction(tr("&Postion System"),this,SLOT(slotGpsPosition()));
 
     //Help
     ui->menuHelp->addAction("Help",this,SLOT(slotHelp()));
@@ -259,7 +256,7 @@ void MainWindow::slotNewProject()
         return;
     }
 
-//    sqlFunc->createTable()
+    //    sqlFunc->createTable()
     sqlFunc->closeDataBase();
 
     this->setCurrentProject(projectInfo);
@@ -349,6 +346,14 @@ void MainWindow::slotExportSPSFiles()
         m_exportSpsFileDlg = new ExportSPSFilesDlg(this);
     }
     m_exportSpsFileDlg->show();
+}
+
+void MainWindow::slotGpsPosition()
+{
+    if(!m_gpsPositionSystem){
+        m_gpsPositionSystem = new GPositionSystem();
+    }
+    m_gpsPositionSystem->show();
 }
 
 void MainWindow::slotHelp()

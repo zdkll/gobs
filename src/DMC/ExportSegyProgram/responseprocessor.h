@@ -23,8 +23,8 @@ private:
     float  m_dt;//采样点间隔
     int      m_nf1,m_nf2;//频率范围（平路数据的位置）
     //数据输入输出,提前开好内存
-    double             *m_data;//fftw变换实数
-    fftw_complex  *m_dataComplex;//fftw变换复数
+    double                *m_data;//fftw变换实数
+    std::complex<double> *m_dataComplex;//fftw变换复数
     std::complex<double>   *m_hs;//Hs 提前算好
 
     fftw_plan          m_r2cPlan,m_c2rPlan;

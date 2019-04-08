@@ -118,7 +118,7 @@ protected:
     virtual bool   preProcesss() = 0;
     //数据处理程序
     virtual bool   run() = 0;
-    bool           finalize();
+    virtual bool  finalize();
 
     bool        initLog(const QString &projPath,const QString &jobName);
     static void myMsgHandler(QtMsgType qtMsgType,const QMessageLogContext &, const QString &);
