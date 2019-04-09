@@ -16,6 +16,15 @@ DLLDESTDIR = $$GOBS_BIN
 DESTDIR =$$GOBS_BIN
 }
 
+GOBS_THIRDPARTY_LIB =
+contains(QMAKE_HOST.arch, x86):{
+GOBS_THIRDPARTY_LIB = $$GOBS_THIRDPARTY/lib/x86
+}
+
+contains(QMAKE_HOST.arch, x86_64):{
+GOBS_THIRDPARTY_LIB = $$GOBS_THIRDPARTY/lib/x64
+}
+
 
 #定义拷贝头文件
 #defineTest(copyHeaders){

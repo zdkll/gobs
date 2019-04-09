@@ -18,7 +18,7 @@ include(../../gobs.pri)
 INCLUDEPATH += $$GOBS_DIR/include
 
 INCLUDEPATH += $$GOBS_SRC/GPositionSystem \
-        $$GOBS_THIRDPARTY_LIB/include  \
+        $$GOBS_THIRDPARTY/include  \
         $$GOBS_SRC/GPublicSo
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem

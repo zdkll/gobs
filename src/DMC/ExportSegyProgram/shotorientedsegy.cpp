@@ -1,5 +1,5 @@
-#include "shotorientedsegy.h"
-#include "responseprocessor.h"
+﻿#include "shotorientedsegy.h"
+#include "responseprocessorf.h"
 
 #define RecvSegy_BHX_FileFilter "RecvLine*_bhx.segy"
 #define RecvSegy_BHY_FileFilter "RecvLine*_bhy.segy"

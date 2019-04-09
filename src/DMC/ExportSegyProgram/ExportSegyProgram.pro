@@ -22,7 +22,7 @@ LIBS  +=  -L$$GOBS_THIRDPARTY_LIB -llibfftw3f-3
 
 
 INCLUDEPATH += $$GOBS_SRC/Algorithm \
-       $$GOBS_THIRDPARTY_LIB/include
+       $$GOBS_THIRDPARTY/include
 
 
 SOURCES += main.cpp \
