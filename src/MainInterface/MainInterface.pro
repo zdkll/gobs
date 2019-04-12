@@ -1,4 +1,4 @@
-#-------------------------------------------------
+     #-------------------------------------------------
 #
 # Project created by QtCreator 2017-11-06T09:45:39
 #
@@ -19,10 +19,13 @@ INCLUDEPATH += $$GOBS_DIR/include
 
 INCLUDEPATH += $$GOBS_SRC/GPositionSystem \
         $$GOBS_THIRDPARTY/include  \
+        $$GOBS_THIRDPARTY/include/matlab  \
         $$GOBS_SRC/GPublicSo
 
 LIBS += -L$$GOBS_DIR/lib -lCore -lSqlFunctions -lGPublicSo -lGPositionSystem
 
+
+LIBS += -L$$GOBS_THIRDPARTY_LIB  -lfrft -llibmx -llibmat -lmclmcr -lmclmcrrt
 
 SOURCES += main.cpp\
         mainwindow.cpp \

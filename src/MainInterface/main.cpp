@@ -6,6 +6,9 @@
 #include "logindlg.h"
 #include "gpositionsystem.h"
 
+#include "frft.h"
+#include "matlab/engine.h"
+
 using namespace Core;
 
 int main(int argc, char *argv[])
